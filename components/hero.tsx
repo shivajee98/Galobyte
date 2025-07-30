@@ -1,12 +1,15 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { ArrowRight, Rocket, Sparkles } from "lucide-react"
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Rocket, Sparkles } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden select-none">
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden select-none"
+    >
       <div className="container mx-auto px-4 text-center relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -46,8 +49,9 @@ export default function Hero() {
             transition={{ delay: 0.6, duration: 0.8 }}
             className="text-xl md:text-2xl text-gray-300 mb-10 max-w-4xl mx-auto leading-relaxed text-pretty"
           >
-            Where stellar innovation meets infinite possibilities. We architect premium digital solutions that transcend
-            the boundaries of technology, propelling your business into the cosmic future.
+            Where stellar innovation meets infinite possibilities. We architect
+            premium digital solutions that transcend the boundaries of
+            technology, propelling your business into the cosmic future.
           </motion.p>
 
           <motion.div
@@ -115,5 +119,5 @@ export default function Hero() {
         />
       </div>
     </section>
-  )
+  );
 }

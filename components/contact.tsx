@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Mail, Phone, MapPin, Send, Star, Clock } from "lucide-react"
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Mail, Phone, MapPin, Send, Star, Clock } from "lucide-react";
 
 export default function Contact() {
   const contactInfo = [
@@ -37,7 +37,7 @@ export default function Contact() {
       link: "#",
       description: "Always ready for your next launch",
     },
-  ]
+  ];
 
   return (
     <section id="contact" className="py-20 relative">
@@ -67,8 +67,8 @@ export default function Contact() {
             <span className="text-white">Digital Odyssey</span>
           </h2>
           <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-            Ready to transcend the boundaries of digital possibility? Connect with our cosmic crew and let's architect
-            your journey to the stars.
+            Ready to transcend the boundaries of digital possibility? Connect
+            with our cosmic crew and let's architect your journey to the stars.
           </p>
         </motion.div>
 
@@ -99,8 +99,12 @@ export default function Contact() {
                       <info.icon className="h-4 w-4 text-yellow-400" />
                     </motion.div>
                     <div>
-                      <CardTitle className="text-white text-base">{info.title}</CardTitle>
-                      <p className="text-gray-400 text-xs">{info.description}</p>
+                      <CardTitle className="text-white text-base">
+                        {info.title}
+                      </CardTitle>
+                      <p className="text-gray-400 text-xs">
+                        {info.description}
+                      </p>
                     </div>
                   </CardHeader>
                   <CardContent className="pt-0">
@@ -125,9 +129,12 @@ export default function Contact() {
           >
             <Card className="bg-transparent border-gray-800/50 backdrop-blur-sm p-4">
               <CardHeader className="pb-3">
-                <CardTitle className="text-white text-xl mb-1">Initiate Contact Protocol</CardTitle>
+                <CardTitle className="text-white text-xl mb-1">
+                  Initiate Contact Protocol
+                </CardTitle>
                 <p className="text-gray-400 text-sm">
-                  Share your vision and let's create something extraordinary together.
+                  Share your vision and let's create something extraordinary
+                  together.
                 </p>
               </CardHeader>
               <CardContent>
@@ -175,5 +182,5 @@ export default function Contact() {
         </div>
       </div>
     </section>
-  )
+  );
 }

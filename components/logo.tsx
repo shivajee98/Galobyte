@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 
 export default function Logo() {
   return (
@@ -14,7 +14,11 @@ export default function Logo() {
         {/* Outer rotating ring */}
         <motion.div
           animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+          transition={{
+            duration: 20,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "linear",
+          }}
           className="w-12 h-12 rounded-full border-2 border-cosmic-gold-400/40 relative"
         >
           {/* Inner glow */}
@@ -23,7 +27,11 @@ export default function Logo() {
           {/* Inner rotating ring */}
           <motion.div
             animate={{ rotate: -360 }}
-            transition={{ duration: 15, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+            transition={{
+              duration: 15,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "linear",
+            }}
             className="absolute inset-2 rounded-full border border-cosmic-gold-500/60"
           >
             {/* Orbital dots */}
@@ -58,5 +66,5 @@ export default function Logo() {
         </motion.p>
       </div>
     </motion.div>
-  )
+  );
 }

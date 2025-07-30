@@ -1,18 +1,47 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Smartphone, Cloud, GraduationCap, Settings, Code, Brain, Search, Wrench, Star, RocketIcon, CheckCircle, Shield, Zap } from "lucide-react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "./ui/badge"
+import { motion } from "framer-motion";
+import {
+  Smartphone,
+  Cloud,
+  GraduationCap,
+  Settings,
+  Code,
+  Brain,
+  Search,
+  Wrench,
+  Star,
+  RocketIcon,
+  CheckCircle,
+  Shield,
+  Zap,
+} from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "./ui/badge";
 
 export default function Services() {
   const services = [
-     {
+    {
       icon: Smartphone,
       title: "App Development",
-      description: "Stellar mobile & web applications that transcend digital boundaries",
-      details: "iOS, Android, React Native, Progressive Web Apps, Cross-Platform Solutions",
-      technologies: ["React Native", "Flutter", "Swift", "Kotlin", "PWA", "Ionic"],
+      description:
+        "Stellar mobile & web applications that transcend digital boundaries",
+      details:
+        "iOS, Android, React Native, Progressive Web Apps, Cross-Platform Solutions",
+      technologies: [
+        "React Native",
+        "Flutter",
+        "Swift",
+        "Kotlin",
+        "PWA",
+        "Ionic",
+      ],
       features: [
         "Native iOS & Android Development",
         "Cross-Platform Solutions",
@@ -75,7 +104,8 @@ export default function Services() {
     {
       icon: Code,
       title: "Full-Stack Development",
-      description: "Complete solutions from frontend nebulae to backend black holes",
+      description:
+        "Complete solutions from frontend nebulae to backend black holes",
       details: "React, Node.js, Python, Database Design, API Development",
       benefits: [
         "End-to-end development with unified architecture",
@@ -120,7 +150,7 @@ export default function Services() {
         "Performance optimization and scaling recommendations",
       ],
     },
-  ]
+  ];
 
   return (
     <section id="services" className="py-20 relative">
@@ -148,8 +178,9 @@ export default function Services() {
             </span>
           </h2>
           <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-            Discover our constellation of premium technology services, each crafted to propel your business beyond the
-            event horizon of digital transformation.
+            Discover our constellation of premium technology services, each
+            crafted to propel your business beyond the event horizon of digital
+            transformation.
           </p>
         </motion.div>
 
@@ -180,7 +211,10 @@ export default function Services() {
                     >
                       Featured
                     </Badge>
-                    <Badge variant="secondary" className="bg-green-500/10 text-green-400 border-green-500/20">
+                    <Badge
+                      variant="secondary"
+                      className="bg-green-500/10 text-green-400 border-green-500/20"
+                    >
                       Most Popular
                     </Badge>
                   </div>
@@ -195,7 +229,9 @@ export default function Services() {
 
                 {/* Technologies */}
                 <div className="mb-4">
-                  <h4 className="text-sm font-semibold text-cosmic-gold-400 mb-2">Technologies:</h4>
+                  <h4 className="text-sm font-semibold text-cosmic-gold-400 mb-2">
+                    Technologies:
+                  </h4>
                   <div className="flex flex-wrap gap-2">
                     {services[0]?.technologies?.map((tech, index) => (
                       <Badge
@@ -216,8 +252,12 @@ export default function Services() {
                       key={index}
                       className="text-center p-3 rounded-lg bg-cosmic-gold-500/5 border border-cosmic-gold-500/10"
                     >
-                      <div className="text-lg font-bold text-cosmic-gold-400">{metric.value}</div>
-                      <div className="text-xs text-gray-400">{metric.label}</div>
+                      <div className="text-lg font-bold text-cosmic-gold-400">
+                        {metric.value}
+                      </div>
+                      <div className="text-xs text-gray-400">
+                        {metric.label}
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -241,7 +281,9 @@ export default function Services() {
                         className="flex items-start space-x-2"
                       >
                         <CheckCircle className="w-4 h-4 text-cosmic-gold-400 mt-0.5 flex-shrink-0" />
-                        <p className="text-sm text-gray-400 leading-relaxed">{feature}</p>
+                        <p className="text-sm text-gray-400 leading-relaxed">
+                          {feature}
+                        </p>
                       </motion.div>
                     ))}
                   </div>
@@ -263,7 +305,9 @@ export default function Services() {
                       className="flex items-start space-x-3 p-3 rounded-lg bg-gradient-to-r from-cosmic-gold-500/5 to-transparent border-l-2 border-cosmic-gold-400/30"
                     >
                       <Shield className="w-4 h-4 text-cosmic-gold-400 mt-0.5 flex-shrink-0" />
-                      <p className="text-sm text-gray-300 leading-relaxed">{benefit}</p>
+                      <p className="text-sm text-gray-300 leading-relaxed">
+                        {benefit}
+                      </p>
                     </motion.div>
                   ))}
                 </div>
@@ -297,24 +341,32 @@ export default function Services() {
                   <CardDescription className="text-gray-400 text-sm leading-relaxed mb-2">
                     {service.description}
                   </CardDescription>
-                  <p className="text-xs text-yellow-400/80 font-medium">{service.details}</p>
+                  <p className="text-xs text-yellow-400/80 font-medium">
+                    {service.details}
+                  </p>
                 </CardHeader>
                 <CardContent className="pt-0">
                   <div className="space-y-1">
-                    <h4 className="text-xs font-semibold text-gray-300 mb-2">Key Benefits:</h4>
-                    {service.benefits.slice(0, 2).map((benefit, benefitIndex) => (
-                      <motion.div
-                        key={benefitIndex}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ delay: benefitIndex * 0.05 }}
-                        viewport={{ once: true }}
-                        className="flex items-start space-x-2"
-                      >
-                        <div className="w-1 h-1 bg-yellow-400 rounded-full mt-1.5 flex-shrink-0"></div>
-                        <p className="text-xs text-gray-400 leading-relaxed">{benefit}</p>
-                      </motion.div>
-                    ))}
+                    <h4 className="text-xs font-semibold text-gray-300 mb-2">
+                      Key Benefits:
+                    </h4>
+                    {service.benefits
+                      .slice(0, 2)
+                      .map((benefit, benefitIndex) => (
+                        <motion.div
+                          key={benefitIndex}
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ delay: benefitIndex * 0.05 }}
+                          viewport={{ once: true }}
+                          className="flex items-start space-x-2"
+                        >
+                          <div className="w-1 h-1 bg-yellow-400 rounded-full mt-1.5 flex-shrink-0"></div>
+                          <p className="text-xs text-gray-400 leading-relaxed">
+                            {benefit}
+                          </p>
+                        </motion.div>
+                      ))}
                   </div>
                 </CardContent>
               </Card>
@@ -347,7 +399,9 @@ export default function Services() {
                     <CardDescription className="text-gray-400 text-sm leading-relaxed mb-2">
                       {services[3].description}
                     </CardDescription>
-                    <p className="text-xs text-yellow-400/80 font-medium">{services[3].details}</p>
+                    <p className="text-xs text-yellow-400/80 font-medium">
+                      {services[3].details}
+                    </p>
                   </div>
                 </div>
               </CardHeader>
@@ -363,7 +417,9 @@ export default function Services() {
                       className="flex items-start space-x-2"
                     >
                       <div className="w-1 h-1 bg-yellow-400 rounded-full mt-1.5 flex-shrink-0"></div>
-                      <p className="text-xs text-gray-400 leading-relaxed">{benefit}</p>
+                      <p className="text-xs text-gray-400 leading-relaxed">
+                        {benefit}
+                      </p>
                     </motion.div>
                   ))}
                 </div>
@@ -397,24 +453,32 @@ export default function Services() {
                   <CardDescription className="text-gray-400 text-sm leading-relaxed mb-2">
                     {service.description}
                   </CardDescription>
-                  <p className="text-xs text-yellow-400/80 font-medium">{service.details}</p>
+                  <p className="text-xs text-yellow-400/80 font-medium">
+                    {service.details}
+                  </p>
                 </CardHeader>
                 <CardContent className="pt-0">
                   <div className="space-y-1">
-                    <h4 className="text-xs font-semibold text-gray-300 mb-2">Key Benefits:</h4>
-                    {service.benefits.slice(0, 2).map((benefit, benefitIndex) => (
-                      <motion.div
-                        key={benefitIndex}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ delay: benefitIndex * 0.05 }}
-                        viewport={{ once: true }}
-                        className="flex items-start space-x-2"
-                      >
-                        <div className="w-1 h-1 bg-yellow-400 rounded-full mt-1.5 flex-shrink-0"></div>
-                        <p className="text-xs text-gray-400 leading-relaxed">{benefit}</p>
-                      </motion.div>
-                    ))}
+                    <h4 className="text-xs font-semibold text-gray-300 mb-2">
+                      Key Benefits:
+                    </h4>
+                    {service.benefits
+                      .slice(0, 2)
+                      .map((benefit, benefitIndex) => (
+                        <motion.div
+                          key={benefitIndex}
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ delay: benefitIndex * 0.05 }}
+                          viewport={{ once: true }}
+                          className="flex items-start space-x-2"
+                        >
+                          <div className="w-1 h-1 bg-yellow-400 rounded-full mt-1.5 flex-shrink-0"></div>
+                          <p className="text-xs text-gray-400 leading-relaxed">
+                            {benefit}
+                          </p>
+                        </motion.div>
+                      ))}
                   </div>
                 </CardContent>
               </Card>
@@ -423,5 +487,5 @@ export default function Services() {
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -1,25 +1,25 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { useState, useEffect } from "react"
-import { Menu, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import Logo from "@/components/logo"
-import { cn } from "@/lib/utils"
-import Link from "next/link"
+import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Logo from "@/components/logo";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 export default function Header() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
+      setIsScrolled(window.scrollY > 50);
+    };
 
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navItems = [
     { name: "Home", href: "/" },
@@ -27,22 +27,22 @@ export default function Header() {
     { name: "Works", href: "/works" },
     { name: "About", href: "#about" },
     { name: "Contact", href: "#contact" },
-  ]
+  ];
 
   const handleNavClick = (href: string) => {
     if (href.startsWith("#")) {
-      const element = document.querySelector(href)
+      const element = document.querySelector(href);
       if (element) {
         element.scrollIntoView({
           behavior: "smooth",
           block: "start",
-        })
+        });
       }
     } else {
-      window.location.href = href
+      window.location.href = href;
     }
-    setIsMobileMenuOpen(false)
-  }
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <motion.header
@@ -50,14 +50,16 @@ export default function Header() {
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled ? "bg-black/90 backdrop-blur-md border-b border-cosmic-gold-400/20 shadow-lg" : "bg-transparent"
+        isScrolled
+          ? "bg-black/90 backdrop-blur-md border-b border-cosmic-gold-400/20 shadow-lg"
+          : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
-         <Link href={"/"}>
-          <Logo />
-         </Link>
+          <Link href={"/"}>
+            <Logo />
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
@@ -68,7 +70,8 @@ export default function Header() {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
-                className={cn("text-gray-300 hover:text-cosmic-gold-400 transition-all duration-300 relative group font-medium text-sm tracking-wide"
+                className={cn(
+                  "text-gray-300 hover:text-cosmic-gold-400 transition-all duration-300 relative group font-medium text-sm tracking-wide"
                 )}
               >
                 {item.name}
@@ -128,5 +131,5 @@ export default function Header() {
         )}
       </div>
     </motion.header>
-  )
+  );
 }
