@@ -12,15 +12,15 @@ export default function Contact() {
     {
       icon: Mail,
       title: "Cosmic Communication",
-      details: "hello@galobyte.com",
-      link: "mailto:hello@galobyte.com",
+      details: "info.galobyte@gmail.com",
+      link: "mailto:info.galobyte@gmail.com",
       description: "Direct line to our mission control",
     },
     {
       icon: Phone,
       title: "Stellar Hotline",
-      details: "+1 (555) 123-4567",
-      link: "tel:+15551234567",
+      details: "+91 8102140440",
+      link: "tel:+918102140440",
       description: "24/7 premium support available",
     },
     {

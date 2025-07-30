@@ -5,6 +5,8 @@ import { useState, useEffect } from "react"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Logo from "@/components/logo"
+import { cn } from "@/lib/utils"
+import Link from "next/link"
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -20,19 +22,24 @@ export default function Header() {
   }, [])
 
   const navItems = [
-    { name: "Home", href: "#home" },
+    { name: "Home", href: "/" },
     { name: "Services", href: "#services" },
+    { name: "Works", href: "/works" },
     { name: "About", href: "#about" },
     { name: "Contact", href: "#contact" },
   ]
 
   const handleNavClick = (href: string) => {
-    const element = document.querySelector(href)
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      })
+    if (href.startsWith("#")) {
+      const element = document.querySelector(href)
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        })
+      }
+    } else {
+      window.location.href = href
     }
     setIsMobileMenuOpen(false)
   }
@@ -48,7 +55,9 @@ export default function Header() {
     >
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
+         <Link href={"/"}>
           <Logo />
+         </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
@@ -59,7 +68,8 @@ export default function Header() {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="text-gray-300 hover:text-cosmic-gold-400 transition-all duration-300 relative group font-medium text-sm tracking-wide"
+                className={cn("text-gray-300 hover:text-cosmic-gold-400 transition-all duration-300 relative group font-medium text-sm tracking-wide"
+                )}
               >
                 {item.name}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-cosmic-gold-400 to-cosmic-gold-600 group-hover:w-full transition-all duration-300"></span>

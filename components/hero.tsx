@@ -6,7 +6,7 @@ import { ArrowRight, Rocket, Sparkles } from "lucide-react"
 
 export default function Hero() {
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+    <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden select-none">
       <div className="container mx-auto px-4 text-center relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -66,7 +66,7 @@ export default function Hero() {
             <Button
               variant="outline"
               size="lg"
-              className="border-cosmic-gold-400/50 text-cosmic-gold-400 hover:bg-cosmic-gold-400/10 hover:border-cosmic-gold-400 px-10 py-4 text-lg group bg-transparent backdrop-blur-sm transition-all duration-300"
+              className="border-cosmic-gold-400/50 text-cosmic-gold-400 hover:bg-cosmic-gold-400/10 hover:text-cosmic-gold-500 hover:border-cosmic-gold-400 px-10 py-4 text-lg group bg-transparent backdrop-blur-sm transition-all duration-300"
             >
               Explore the Galaxy
               <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
