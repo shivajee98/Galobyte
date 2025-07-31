@@ -19,14 +19,8 @@ export default function Footer() {
       "DevOps Excellence",
       "AI Solutions",
     ],
-    "Mission Control": ["About Universe", "Our Crew", "Careers", "Contact"],
-    "Knowledge Base": ["Blog", "Case Studies", "Documentation", "Support"],
-    "Legal Orbit": [
-      "Privacy Policy",
-      "Terms of Service",
-      "Cookie Policy",
-      "Compliance",
-    ],
+    // "Mission Control": ["About Universe", "Our Crew", "Careers", "Contact"],
+    // "Knowledge Base": ["Blog", "Case Studies", "Documentation", "Support"],
   };
 
   return (
