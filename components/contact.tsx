@@ -7,6 +7,37 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Mail, Phone, MapPin, Send, Star, Clock } from "lucide-react";
 
+
+
+
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+
+  const formData = new FormData(e.currentTarget);
+  const payload = {
+    name: formData.get('name'),
+    email: formData.get('email'),
+    subject: formData.get('subject'),
+    message: formData.get('message'),
+  };
+
+  const res = await fetch('/api/send-email', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  });
+
+  const result = await res.json();
+  if (result.success) {
+    alert('Email sent!');
+  } else {
+    alert('Something went wrong.');
+  }
+};
+
+
 export default function Contact() {
   const contactInfo = [
     {
@@ -19,14 +50,14 @@ export default function Contact() {
     {
       icon: Phone,
       title: "Stellar Hotline",
-      details: "+91 8102140440",
-      link: "tel:+918102140440",
+      details: "+91 9430083275",
+      link: "tel:+919430083275",
       description: "24/7 premium support available",
     },
     {
       icon: MapPin,
-      title: "Galactic Headquarters",
-      details: "Digital Galaxy, Sector 7",
+      title: "Office",
+      details: "Ved Vyas Puri Sector 1, Meerut, Uttar Pradesh",
       link: "#",
       description: "Where innovation meets infinity",
     },
@@ -138,7 +169,7 @@ export default function Contact() {
                 </p>
               </CardHeader>
               <CardContent>
-                <form className="space-y-4">
+                <form className="space-y-4" onSubmit={handleSubmit}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <div>
                       <Input
