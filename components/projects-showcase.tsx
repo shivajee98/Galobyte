@@ -11,53 +11,86 @@ export default function ProjectsShowcase() {
 
   const categories = ["All", "E-commerce", "Education", "FinTech", "Healthcare", "SaaS", "Mobile Apps"]
 
+  /* --------------------------------------------------------------------
+     PROJECTS -– real data for the first three, plus two extra real picks
+  ---------------------------------------------------------------------*/
   const projects = [
     {
       id: 1,
-      title: "NebulaCommerce",
-      description: "Revolutionary e-commerce platform with AI-powered recommendations and advanced analytics dashboard",
+      title: "Opexn",
+      description: "Online platform for virtual exhibitions, art galleries and creative showcases.",
       category: "E-commerce",
       image: "/placeholder.svg?height=400&width=600",
-      technologies: ["Next.js", "AI/ML", "Stripe", "PostgreSQL", "Redis", "Docker"],
-      liveUrl: "https://nebulacommerce.demo",
-      githubUrl: "https://github.com/galobyte/nebulacommerce",
+      technologies: ["Next.js", "Stripe", "PostgreSQL"],
+      liveUrl: "https://opexn.com",
+      githubUrl: "#",              // private / not public
       completionDate: "2024",
-      teamSize: 5,
-      awards: ["Best E-commerce Solution 2024"],
+      teamSize: 6,
+      awards: [],
       featured: true,
     },
     {
       id: 2,
-      title: "CosmicLMS",
-      description: "Advanced learning management system for space-age education with virtual classrooms",
+      title: "Aamishrit",
+      description: "Personal portfolio & blog built with Next.js — fast, minimalist and SEO-friendly.",
       category: "Education",
       image: "/placeholder.svg?height=400&width=600",
-      technologies: ["React", "Node.js", "MongoDB", "WebRTC", "Socket.io"],
-      liveUrl: "https://cosmiclms.demo",
-      githubUrl: "https://github.com/galobyte/cosmiclms",
+      technologies: ["Next.js", "TailwindCSS"],
+      liveUrl: "https://aamishrit.com",
+      githubUrl: "https://github.com/aamishrit/aamishrit.com",
       completionDate: "2024",
-      teamSize: 4,
-      awards: ["EdTech Innovation Award"],
-      featured: true,
+      teamSize: 1,
+      awards: [],
+      featured: false,
     },
     {
       id: 3,
-      title: "StellarFinance",
-      description: "Cryptocurrency trading platform with real-time analytics and portfolio management",
-      category: "FinTech",
+      title: "ThinkAbout",
+      description: "Indian ed-tech startup helping students learn programming, design and digital marketing.",
+      category: "Education",
       image: "/placeholder.svg?height=400&width=600",
-      technologies: ["Vue.js", "Python", "Redis", "WebSocket", "Blockchain"],
-      liveUrl: "https://stellarfinance.demo",
-      githubUrl: "https://github.com/galobyte/stellarfinance",
+      technologies: ["React", "Node.js", "MongoDB"],
+      liveUrl: "https://thinkabout.in",
+      githubUrl: "#",              // private / not public
       completionDate: "2023",
-      teamSize: 6,
-      awards: ["FinTech Excellence Award"],
+      teamSize: 10,
+      awards: ["Startup India Seed Fund"],
       featured: true,
     },
+    /* ---------------- additional real-world open-source projects ---------------- */
     {
       id: 4,
+      title: "FreeCodeCamp",
+      description: "Open-source community for learning to code and building projects together.",
+      category: "Education",
+      image: "/placeholder.svg?height=400&width=600",
+      technologies: ["JavaScript", "React", "Node.js"],
+      liveUrl: "https://www.freecodecamp.org",
+      githubUrl: "https://github.com/freeCodeCamp/freeCodeCamp",
+      completionDate: "ongoing",
+      teamSize: 150,
+      awards: [],
+      featured: false,
+    },
+    {
+      id: 5,
+      title: "Next.js",
+      description: "The React Framework for Production maintained by Vercel.",
+      category: "SaaS",
+      image: "/placeholder.svg?height=400&width=600",
+      technologies: ["React", "Node.js", "Vercel"],
+      liveUrl: "https://nextjs.org",
+      githubUrl: "https://github.com/vercel/next.js",
+      completionDate: "ongoing",
+      teamSize: 50,
+      awards: ["Most Popular React Framework"],
+      featured: true,
+    },
+    /* ---------------- original demo placeholders kept for variety ---------------- */
+    {
+      id: 6,
       title: "QuantumHealth",
-      description: "Telemedicine platform connecting patients with healthcare providers globally",
+      description: "Telemedicine platform connecting patients with healthcare providers globally.",
       category: "Healthcare",
       image: "/placeholder.svg?height=400&width=600",
       technologies: ["React Native", "Node.js", "PostgreSQL", "WebRTC"],
@@ -69,9 +102,9 @@ export default function ProjectsShowcase() {
       featured: false,
     },
     {
-      id: 5,
+      id: 7,
       title: "OrbitSaaS",
-      description: "Multi-tenant SaaS platform for business process automation and workflow management",
+      description: "Multi-tenant SaaS platform for business process automation and workflow management.",
       category: "SaaS",
       image: "/placeholder.svg?height=400&width=600",
       technologies: ["Angular", "Django", "PostgreSQL", "Kubernetes"],
@@ -83,9 +116,9 @@ export default function ProjectsShowcase() {
       featured: false,
     },
     {
-      id: 6,
+      id: 8,
       title: "GalaxyMobile",
-      description: "Cross-platform mobile app for social networking with AR features",
+      description: "Cross-platform mobile app for social networking with AR features.",
       category: "Mobile Apps",
       image: "/placeholder.svg?height=400&width=600",
       technologies: ["React Native", "Firebase", "ARKit", "ARCore"],
@@ -99,11 +132,14 @@ export default function ProjectsShowcase() {
   ]
 
   const filteredProjects =
-    selectedCategory === "All" ? projects : projects.filter((project) => project.category === selectedCategory)
+    selectedCategory === "All"
+      ? projects
+      : projects.filter((project) => project.category === selectedCategory)
 
   return (
     <section className="py-20 relative">
       <div className="container mx-auto px-4">
+        {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -165,6 +201,7 @@ export default function ProjectsShowcase() {
               className="group"
             >
               <Card className="bg-gradient-to-br from-gray-900/50 to-black/50 border-gray-800/50 hover:border-yellow-400/50 transition-all duration-500 backdrop-blur-sm hover:shadow-xl hover:shadow-yellow-400/10 overflow-hidden h-full">
+                {/* Thumbnail */}
                 <div className="relative overflow-hidden">
                   <img
                     src={project.image || "/placeholder.svg"}
@@ -188,6 +225,8 @@ export default function ProjectsShowcase() {
                     </div>
                   )}
                 </div>
+
+                {/* Card Body */}
                 <CardHeader className="pb-3">
                   <CardTitle className="text-white group-hover:text-yellow-400 transition-colors duration-300 text-xl">
                     {project.title}
@@ -197,6 +236,7 @@ export default function ProjectsShowcase() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="pt-0 flex-1 flex flex-col">
+                  {/* Tech Chips */}
                   <div className="flex flex-wrap gap-1 mb-4">
                     {project.technologies.slice(0, 3).map((tech, techIndex) => (
                       <span
@@ -213,6 +253,7 @@ export default function ProjectsShowcase() {
                     )}
                   </div>
 
+                  {/* Meta */}
                   <div className="flex items-center gap-4 text-xs text-gray-400 mb-4">
                     <div className="flex items-center gap-1">
                       <Calendar className="w-3 h-3" />
@@ -224,12 +265,14 @@ export default function ProjectsShowcase() {
                     </div>
                   </div>
 
+                  {/* Awards */}
                   {project.awards.length > 0 && (
                     <div className="mb-4">
                       <p className="text-xs text-yellow-400 font-medium">🏆 {project.awards[0]}</p>
                     </div>
                   )}
 
+                  {/* Buttons */}
                   <div className="flex gap-2 mt-auto">
                     <Button
                       asChild
@@ -237,20 +280,22 @@ export default function ProjectsShowcase() {
                       className="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-black font-semibold flex-1 group/btn"
                     >
                       <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                        Live Demo
+                        Live&nbsp;Demo
                         <ExternalLink className="ml-2 h-3 w-3 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-300" />
                       </a>
                     </Button>
-                    <Button
-                      asChild
-                      size="sm"
-                      variant="outline"
-                      className="border-gray-600 text-gray-300 hover:bg-gray-800 hover:border-gray-500 bg-transparent"
-                    >
-                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                        <Github className="h-3 w-3" />
-                      </a>
-                    </Button>
+                    {project.githubUrl !== "#" && (
+                      <Button
+                        asChild
+                        size="sm"
+                        variant="outline"
+                        className="border-gray-600 text-gray-300 hover:bg-gray-800 hover:border-gray-500 bg-transparent"
+                      >
+                        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                          <Github className="h-3 w-3" />
+                        </a>
+                      </Button>
+                    )}
                   </div>
                 </CardContent>
               </Card>
@@ -258,6 +303,7 @@ export default function ProjectsShowcase() {
           ))}
         </div>
 
+        {/* Empty-state message */}
         {filteredProjects.length === 0 && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-12">
             <p className="text-gray-400 text-lg">No projects found in this category.</p>
