@@ -2,40 +2,52 @@
 
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { ExternalLink, ArrowRight, Rocket } from "lucide-react"
 import Link from "next/link"
 
 export default function Work() {
+  /* ------------------------------------------------------------------
+     Featured projects – real sites
+  ------------------------------------------------------------------ */
   const featuredProjects = [
     {
       id: 1,
-      title: "NebulaCommerce",
-      description: "Revolutionary e-commerce platform with AI-powered recommendations",
-      category: "E-commerce Platform",
-      image: "/placeholder.svg?height=400&width=600",
-      technologies: ["Next.js", "AI/ML", "Stripe", "PostgreSQL"],
-      liveUrl: "https://nebulacommerce.demo",
+      title: "Opexn",
+      description:
+        "Immersive online platform for virtual exhibitions and digital art showcases.",
+      category: "Creative E-commerce",
+      image: "/opexn-logo.png?height=400&width=600",
+      technologies: ["Next.js", "Stripe", "PostgreSQL"],
+      liveUrl: "https://opexn.com",
       featured: true,
     },
     {
       id: 2,
-      title: "CosmicLMS",
-      description: "Advanced learning management system for space-age education",
+      title: "ThinkAbout",
+      description:
+        "Ed-tech venture helping students master programming, design and marketing.",
       category: "Education Technology",
-      image: "/placeholder.svg?height=400&width=600",
-      technologies: ["React", "Node.js", "MongoDB", "WebRTC"],
-      liveUrl: "https://cosmiclms.demo",
+      image: "/rtnm.png?height=400&width=600",
+      technologies: ["React", "Node.js", "MongoDB"],
+      liveUrl: "https://thinkabout.in",
       featured: true,
     },
     {
       id: 3,
-      title: "StellarFinance",
-      description: "Cryptocurrency trading platform with real-time analytics",
-      category: "FinTech",
-      image: "/placeholder.svg?height=400&width=600",
-      technologies: ["Vue.js", "Python", "Redis", "WebSocket"],
-      liveUrl: "https://stellarfinance.demo",
+      title: "Aamishrit.com",
+      description:
+        "Fast, minimalist personal portfolio & blog built on modern React stack.",
+      category: "Portfolio / Blog",
+      image: "/logo.webp?height=400&width=600",
+      technologies: ["Next.js", "TailwindCSS"],
+      liveUrl: "https://aamishrit.com",
       featured: true,
     },
   ]
@@ -43,6 +55,7 @@ export default function Work() {
   return (
     <section id="work" className="py-20 relative">
       <div className="container mx-auto px-4">
+        {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -66,13 +79,13 @@ export default function Work() {
             </span>
           </h2>
           <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-            Explore our constellation of premium digital solutions that have propelled businesses into the cosmic future
-            of technology.
+            Explore our constellation of premium digital solutions that have
+            propelled businesses into the cosmic future of technology.
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-12">
-          {/* Featured Large Project */}
+          {/* Main featured project (first item) */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -117,7 +130,11 @@ export default function Work() {
                   asChild
                   className="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-black font-semibold group/btn"
                 >
-                  <a href={featuredProjects[0].liveUrl} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={featuredProjects[0].liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     View Live Project
                     <ExternalLink className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-300" />
                   </a>
@@ -126,7 +143,7 @@ export default function Work() {
             </Card>
           </motion.div>
 
-          {/* Side Projects */}
+          {/* Side featured projects */}
           <div className="lg:col-span-4 space-y-6">
             {featuredProjects.slice(1).map((project, index) => (
               <motion.div
@@ -160,14 +177,16 @@ export default function Work() {
                   </CardHeader>
                   <CardContent className="pt-0">
                     <div className="flex flex-wrap gap-1 mb-3">
-                      {project.technologies.slice(0, 2).map((tech, techIndex) => (
-                        <span
-                          key={techIndex}
-                          className="px-2 py-1 bg-gray-800/50 text-gray-300 text-xs rounded border border-gray-700/50"
-                        >
-                          {tech}
-                        </span>
-                      ))}
+                      {project.technologies.slice(0, 2).map(
+                        (tech, techIndex) => (
+                          <span
+                            key={techIndex}
+                            className="px-2 py-1 bg-gray-800/50 text-gray-300 text-xs rounded border border-gray-700/50"
+                          >
+                            {tech}
+                          </span>
+                        )
+                      )}
                       {project.technologies.length > 2 && (
                         <span className="px-2 py-1 bg-gray-800/50 text-gray-400 text-xs rounded border border-gray-700/50">
                           +{project.technologies.length - 2}
@@ -180,7 +199,11 @@ export default function Work() {
                       variant="outline"
                       className="border-yellow-400/50 text-yellow-400 hover:bg-yellow-400/10 hover:border-yellow-400 group/btn bg-transparent"
                     >
-                      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         View Project
                         <ExternalLink className="ml-2 h-3 w-3 group-hover/btn:translate-x-1 transition-transform duration-300" />
                       </a>
@@ -192,7 +215,8 @@ export default function Work() {
           </div>
         </div>
 
-        <motion.div
+        {/* CTA */}
+        {/* <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -209,7 +233,7 @@ export default function Work() {
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
           </Button>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   )

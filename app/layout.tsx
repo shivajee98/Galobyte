@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   title: "Galobyte - Navigating the Digital Cosmos",
   description:
     "Premium technology agency specializing in app development, cloud solutions, AI-driven innovations, and digital transformation services.",
+    icons: "/logo_galobyte.png",
   keywords: ["technology agency", "app development", "cloud solutions", "AI solutions", "digital transformation"],
   authors: [{ name: "Galobyte" }],
   creator: "Galobyte",

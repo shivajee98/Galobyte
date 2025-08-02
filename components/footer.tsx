@@ -6,7 +6,6 @@ import { Github, Twitter, Linkedin, Mail, Star } from "lucide-react";
 
 export default function Footer() {
   const socialLinks = [
-    { icon: Github, href: "#", label: "GitHub" },
     { icon: Twitter, href: "#", label: "Twitter" },
     { icon: Linkedin, href: "#", label: "LinkedIn" },
     { icon: Mail, href: "info.galobyte@gmail.com", label: "Email" },
@@ -15,9 +14,9 @@ export default function Footer() {
   const footerLinks = {
     "Cosmic Services": [
       "App Development",
-      "Cloud Solutions",
-      "DevOps Excellence",
+      "Website Development",
       "AI Solutions",
+      "DevOps Excellence",
     ],
     // "Mission Control": ["About Universe", "Our Crew", "Careers", "Contact"],
     // "Knowledge Base": ["Blog", "Case Studies", "Documentation", "Support"],

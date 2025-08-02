@@ -11,53 +11,53 @@ export default function Testimonials() {
   const testimonials = [
     {
       id: 1,
-      name: "Sarah Chen",
+      name: "Varun Kaushik",
       position: "CEO",
-      company: "TechNova Solutions",
-      image: "/placeholder.svg?height=80&width=80",
-      rating: 5,
+      company: "Opexn",
+      image: "/varun.jpeg?height=80&width=80",
+      rating: 4,
       text: "Galobyte transformed our digital presence beyond our wildest expectations. Their cosmic approach to technology solutions propelled our business into a new dimension of success. The team's expertise in AI and cloud solutions is truly stellar.",
-      project: "NebulaCommerce Platform",
+      project: "Opexn",
     },
     {
       id: 2,
-      name: "Marcus Rodriguez",
-      position: "CTO",
-      company: "EduFuture Academy",
-      image: "/placeholder.svg?height=80&width=80",
-      rating: 5,
+      name: "Ratan Mehta",
+      position: "Co-Founder",
+      company: "Think About",
+      image: "/ratan.jpeg?height=80&width=80",
+      rating: 4,
       text: "The CosmicLMS platform revolutionized our educational delivery. Students are more engaged, teachers love the interface, and our administrative efficiency has increased by 300%. Galobyte's attention to detail is phenomenal.",
-      project: "CosmicLMS Development",
+      project: "Think About LMS",
     },
     {
       id: 3,
-      name: "Dr. Emily Watson",
-      position: "Founder",
-      company: "HealthTech Innovations",
-      image: "/placeholder.svg?height=80&width=80",
+      name: "Anita Reddy",
+      position: "Director of Digital Initiatives",
+      company: "Medira Clinics",
+      image: "/anita.jpeg?height=80&width=80",
       rating: 5,
-      text: "Working with Galobyte on our telemedicine platform was an extraordinary experience. They understood our vision and delivered a solution that exceeded all expectations. Patient satisfaction has increased by 250%.",
-      project: "QuantumHealth Platform",
+      text: "We approached Galobyte to modernize our patient engagement portal. They delivered a responsive, HIPAA-compliant platform that reduced appointment no-shows by over 40%. The communication and delivery timelines were spot on.",
+      project: "Medira Patient Portal",
     },
     {
       id: 4,
-      name: "James Thompson",
-      position: "Managing Director",
-      company: "FinanceFlow Corp",
-      image: "/placeholder.svg?height=80&width=80",
+      name: "Amit Grover",
+      position: "Product Head",
+      company: "FinNexa",
+      image: "/amit.jpeg?height=80&width=80",
       rating: 5,
-      text: "The StellarFinance platform has revolutionized how our clients interact with cryptocurrency markets. The real-time analytics and intuitive design have made us the preferred choice for serious traders.",
-      project: "StellarFinance Trading Platform",
+      text: "The dashboard and analytics platform Galobyte built for us gave our product a much-needed edge. Real-time reporting and streamlined user flows helped us onboard 3x more users within the first month post-launch.",
+      project: "FinNexa Insights Dashboard",
     },
     {
       id: 5,
-      name: "Lisa Park",
-      position: "VP of Operations",
-      company: "GlobalTech Enterprises",
-      image: "/placeholder.svg?height=80&width=80",
+      name: "Priya Narang",
+      position: "COO",
+      company: "Zocta Technologies",
+      image: "/priya.jpeg?height=80&width=80",
       rating: 5,
-      text: "Galobyte's SaaS solution streamlined our entire operation. What used to take weeks now happens in hours. Their team's dedication to excellence and innovation is truly cosmic-level.",
-      project: "OrbitSaaS Platform",
+      text: "We were scaling fast and needed a reliable team to revamp our internal tools. Galobyte not only built what we needed, but also suggested better architecture decisions. Their delivery was clean and ahead of schedule.",
+      project: "Zocta Ops Suite",
     },
   ]
 
@@ -156,16 +156,14 @@ export default function Testimonials() {
                 transition={{ duration: 0.4, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 onClick={() => setCurrentTestimonial(index)}
-                className={`cursor-pointer transition-all duration-300 ${
-                  index === currentTestimonial ? "opacity-100" : "opacity-50 hover:opacity-75"
-                }`}
+                className={`cursor-pointer transition-all duration-300 ${index === currentTestimonial ? "opacity-100" : "opacity-50 hover:opacity-75"
+                  }`}
               >
                 <Card
-                  className={`p-4 transition-all duration-300 ${
-                    index === currentTestimonial
-                      ? "bg-gradient-to-br from-yellow-500/10 to-yellow-600/5 border-yellow-400/30"
-                      : "bg-gradient-to-br from-gray-900/30 to-black/30 border-gray-800/30 hover:border-gray-700/50"
-                  }`}
+                  className={`p-4 transition-all duration-300 ${index === currentTestimonial
+                    ? "bg-gradient-to-br from-yellow-500/10 to-yellow-600/5 border-yellow-400/30"
+                    : "bg-gradient-to-br from-gray-900/30 to-black/30 border-gray-800/30 hover:border-gray-700/50"
+                    }`}
                 >
                   <div className="flex items-center gap-3">
                     <img
@@ -199,8 +197,8 @@ export default function Testimonials() {
         >
           {[
             { number: "98%", label: "Client Satisfaction" },
-            { number: "150+", label: "Projects Completed" },
-            { number: "50+", label: "Happy Clients" },
+            { number: "15+", label: "Projects Completed" },
+            { number: "10+", label: "Happy Clients" },
             { number: "24/7", label: "Support Available" },
           ].map((stat, index) => (
             <div key={index} className="text-center">
