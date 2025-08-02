@@ -1,10 +1,24 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Rocket, Sparkles } from "lucide-react";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { meetingOptions } from "@/constants";
+import { motion } from "framer-motion";
+import { ArrowRight, Clock, ExternalLink, Rocket, Sparkles } from "lucide-react";
 
 export default function Hero() {
+
+  const handleMeetingSelect = (calendlyUrl: string) => {
+    window.open(calendlyUrl, '_blank');
+  };
+
   return (
     <section
       id="home"
@@ -24,8 +38,8 @@ export default function Hero() {
             className="mb-8"
           >
             <span className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-cosmic-gold-500/10 to-cosmic-gold-600/10 border border-cosmic-gold-500/30 text-cosmic-gold-400 text-sm font-medium mb-6 backdrop-blur-sm glass">
-              <Sparkles className="w-4 h-4 mr-2" />
-              Navigating the Digital Cosmos
+                <Sparkles className="w-4 h-4 mr-2 animate-pulse drop-shadow-md" />
+                Navigating the Digital Cosmos
             </span>
           </motion.div>
 
@@ -33,13 +47,13 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-6xl md:text-8xl font-bold mb-8 leading-tight text-balance"
+            className="text-6xl md:text-9xl font-bold mb-8 leading-tight text-balance"
           >
-            <span className="bg-gradient-to-r from-white via-gray-200 to-gray-300 bg-clip-text text-transparent block mb-4">
-              Beyond the
+            <span className="bg-gradient-to-br from-gray-200 via-gray-100 to-gray-400 bg-clip-text text-transparent block mb-4 drop-shadow-2xl">
+              Welcome to
             </span>
             <span className="bg-gradient-to-r from-cosmic-gold-400 via-cosmic-gold-300 to-cosmic-gold-500 bg-clip-text text-transparent">
-              Event Horizon
+              Galobyte
             </span>
           </motion.h1>
 
@@ -60,23 +74,82 @@ export default function Hero() {
             transition={{ delay: 0.8, duration: 0.8 }}
             className="flex flex-col sm:flex-row gap-6 justify-center items-center"
           >
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-cosmic-gold-500 to-cosmic-gold-600 hover:from-cosmic-gold-400 hover:to-cosmic-gold-500 text-black px-10 py-4 text-lg font-semibold group shadow-lg shadow-cosmic-gold-500/25 hover:shadow-cosmic-gold-400/30 transition-all duration-300 cosmic-glow"
+                >
+                  Launch Your Vision
+                  <Rocket className="ml-3 h-5 w-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                className="w-80 bg-black/90 backdrop-blur-md border-cosmic-gold-500/30 shadow-2xl shadow-cosmic-gold-500/10"
+                align="center"
+                sideOffset={8}
+              >
+                <DropdownMenuLabel className="text-cosmic-gold-400 font-semibold text-base px-4 py-3">
+                  Schedule Your Cosmic Journey
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator className="bg-cosmic-gold-500/20" />
+                {meetingOptions.map((option, index) => {
+                  const IconComponent = option.icon;
+                  return (
+                    <DropdownMenuItem
+                      key={index}
+                      onClick={() => handleMeetingSelect(option.calendlyUrl)}
+                      className="px-4 py-4 cursor-pointer hover:bg-cosmic-gold-500/10 focus:bg-cosmic-gold-500/10 transition-colors group"
+                    >
+                      <div className="flex items-start space-x-3 w-full">
+                        <div className="flex-shrink-0 mt-1">
+                          <IconComponent className="h-5 w-5 text-cosmic-gold-400 group-hover:text-cosmic-gold-300 transition-colors" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center justify-between mb-1">
+                            <h4 className="text-white font-medium text-sm group-hover:text-cosmic-gold-100 transition-colors">
+                              {option.title}
+                            </h4>
+                            <div className="flex items-center text-cosmic-gold-400/70 text-xs">
+                              <Clock className="h-3 w-3 mr-1" />
+                              {option.duration}
+                            </div>
+                          </div>
+                          <p className="text-gray-400 text-xs leading-relaxed group-hover:text-gray-300 transition-colors">
+                            {option.description}
+                          </p>
+                        </div>
+                        <ExternalLink className="h-3 w-3 text-cosmic-gold-400/50 group-hover:text-cosmic-gold-400 transition-colors flex-shrink-0 mt-1" />
+                      </div>
+                    </DropdownMenuItem>
+                  );
+                })}
+                <DropdownMenuSeparator className="bg-cosmic-gold-500/20" />
+                <div className="px-4 py-3">
+                  <p className="text-xs text-gray-500 text-center">
+                    Choose the perfect meeting type for your project needs
+                  </p>
+                </div>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            {/* Explore Our Work Button */}
             <Button
               size="lg"
-              className="bg-gradient-to-r from-cosmic-gold-500 to-cosmic-gold-600 hover:from-cosmic-gold-400 hover:to-cosmic-gold-500 text-black px-10 py-4 text-lg font-semibold group shadow-lg shadow-cosmic-gold-500/25 hover:shadow-cosmic-gold-400/30 transition-all duration-300 cosmic-glow"
-            >
-              Launch Your Vision
-              <Rocket className="ml-3 h-5 w-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
-            </Button>
-            <Button
               variant="outline"
-              size="lg"
-              className="border-cosmic-gold-400/50 text-cosmic-gold-400 hover:bg-cosmic-gold-400/10 hover:text-cosmic-gold-500 hover:border-cosmic-gold-400 px-10 py-4 text-lg group bg-transparent backdrop-blur-sm transition-all duration-300"
+              className="border-2 border-yellow-400/30 text-yellow-400 hover:bg-yellow-400/10 hover:border-yellow-400/50 px-8 py-4 text-lg group backdrop-blur-sm transition-all duration-300 bg-transparent hover:text-yellow-600/90"
+              onClick={() => {
+                const workSection = document.getElementById("work");
+                if (workSection) {
+                  workSection.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
             >
-              Explore the Galaxy
-              <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+              Explore Our Work
+              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
             </Button>
           </motion.div>
-        </motion.div>
+          </motion.div>
+
 
         {/* Floating cosmic elements */}
         <motion.div

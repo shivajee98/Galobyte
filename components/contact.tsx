@@ -1,11 +1,15 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Mail, Phone, MapPin, Send, Star, Clock } from "lucide-react";
+import { contactInfo } from "@/constants";
+import { motion } from "framer-motion";
+import { Clock, Loader2, Send, Star } from "lucide-react";
+import { useState } from "react";
+import { Label } from "./ui/label";
+import { toast } from "sonner";
 
 
 
@@ -39,36 +43,78 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 
 
 export default function Contact() {
-  const contactInfo = [
-    {
-      icon: Mail,
-      title: "Cosmic Communication",
-      details: "info.galobyte@gmail.com",
-      link: "mailto:info.galobyte@gmail.com",
-      description: "Direct line to our mission control",
-    },
-    {
-      icon: Phone,
-      title: "Stellar Hotline",
-      details: "+91 9430083275",
-      link: "tel:+919430083275",
-      description: "24/7 premium support available",
-    },
-    {
-      icon: MapPin,
-      title: "Office",
-      details: "Ved Vyas Puri Sector 1, Meerut, Uttar Pradesh",
-      link: "#",
-      description: "Where innovation meets infinity",
-    },
-    {
-      icon: Clock,
-      title: "Mission Hours",
-      details: "24/7 Across All Time Zones",
-      link: "#",
-      description: "Always ready for your next launch",
-    },
-  ];
+
+    const [formData, setFormData] = useState({
+        name: "",
+    email: "",
+    subject: "",
+    message: "",
+    })
+
+    const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
+  const [errorMessage, setErrorMessage] = useState("")
+
+   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitStatus("idle")
+    setErrorMessage("")
+
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          honeypot: "" // Add honeypot field for spam protection
+        }),
+      })
+
+      const result = await response.json()
+
+      if (response.ok) {
+        toast.success("Email send successfully!")
+        setSubmitStatus("success")
+        setFormData({ name: "", email: "", subject: "", message: "" })
+      } else {
+        setSubmitStatus("error")
+
+        // Handle different types of errors
+        if (response.status === 429) {
+            toast.error(`Rate limit exceeded. ${result.error} Please try again later.`)
+          setErrorMessage(`Rate limit exceeded. ${result.error} Please try again later.`)
+        } else if (response.status === 400) {
+          // Handle validation errors
+          if (result.details) {
+            const errorDetails = Object.values(result.details).filter(Boolean).join(', ')
+            setErrorMessage(`Validation error: ${errorDetails}`)
+          } else {
+            toast.error("Please check your input and try again.")
+            setErrorMessage(result.error || "Please check your input and try again.")
+          }
+        } else {
+            toast.error("Failed to send message. Please try again.")
+          setErrorMessage(result.error || "Failed to send message. Please try again.")
+        }
+      }
+    } catch (error) {
+      setSubmitStatus("error")
+      setErrorMessage("Network error. Please check your connection and try again.")
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
   return (
     <section id="contact" className="py-20 relative">
@@ -158,9 +204,9 @@ export default function Contact() {
             viewport={{ once: true }}
             className="lg:col-span-7"
           >
-            <Card className="bg-transparent border-gray-800/50 backdrop-blur-sm p-4">
-              <CardHeader className="pb-3">
-                <CardTitle className="text-white text-xl mb-1">
+            <Card className="bg-transparent border-gray-800/50 backdrop-blur-sm p-6">
+              <CardHeader className="pb-4">
+                <CardTitle className="text-white text-xl mb-2">
                   Initiate Contact Protocol
                 </CardTitle>
                 <p className="text-gray-400 text-sm">
@@ -169,46 +215,128 @@ export default function Contact() {
                 </p>
               </CardHeader>
               <CardContent>
-                <form className="space-y-4" onSubmit={handleSubmit}>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <div>
-                      <Input
-                        placeholder="Your Name"
-                        className="bg-black/50 border-gray-700 text-white placeholder:text-gray-500 focus:border-yellow-400 focus:ring-yellow-400/20 transition-all duration-300 h-10"
+                <form onSubmit={handleSubmit} className="space-y-6">
+                    {/* Honeypot field - hidden from users but visible to bots */}
+                    <div style={{ display: 'none' }}>
+                      <input
+                        type="text"
+                        name="honeypot"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        placeholder="Leave this field empty"
                       />
                     </div>
-                    <div>
+
+                    {/* Name and Email Row - Symmetrically Balanced */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="name" className="text-gray-300 font-medium">
+                          Name
+                        </Label>
+                        <Input
+                          id="name"
+                          name="name"
+                          type="text"
+                          value={formData.name}
+                          onChange={handleInputChange}
+                          required
+                          className="bg-gray-800/50 border-gray-700 text-white placeholder-gray-400 focus:border-yellow-400 focus:ring-yellow-400/20 h-12"
+                          placeholder="Your name"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="email" className="text-gray-300 font-medium">
+                          Email
+                        </Label>
+                        <Input
+                          id="email"
+                          name="email"
+                          type="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          required
+                          className="bg-gray-800/50 border-gray-700 text-white placeholder-gray-400 focus:border-yellow-400 focus:ring-yellow-400/20 h-12"
+                          placeholder="your@email.com"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Subject Field - Full Width for Balance */}
+                    <div className="space-y-2">
+                      <Label htmlFor="subject" className="text-gray-300 font-medium">
+                        Subject
+                      </Label>
                       <Input
-                        type="email"
-                        placeholder="Your Email"
-                        className="bg-black/50 border-gray-700 text-white placeholder:text-gray-500 focus:border-yellow-400 focus:ring-yellow-400/20 transition-all duration-300 h-10"
+                        id="subject"
+                        name="subject"
+                        type="text"
+                        value={formData.subject}
+                        onChange={handleInputChange}
+                        required
+                        className="bg-gray-800/50 border-gray-700 text-white placeholder-gray-400 focus:border-yellow-400 focus:ring-yellow-400/20 h-12"
+                        placeholder="Project inquiry"
                       />
                     </div>
-                  </div>
-                  <div>
-                    <Input
-                      placeholder="Project Subject"
-                      className="bg-black/50 border-gray-700 text-white placeholder:text-gray-500 focus:border-yellow-400 focus:ring-yellow-400/20 transition-all duration-300 h-10"
-                    />
-                  </div>
-                  <div>
-                    <Textarea
-                      placeholder="Describe your cosmic vision..."
-                      rows={5}
-                      className="bg-black/50 border-gray-700 text-white placeholder:text-gray-500 focus:border-yellow-400 focus:ring-yellow-400/20 resize-none transition-all duration-300"
-                    />
-                  </div>
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-black font-semibold py-3 group shadow-lg shadow-yellow-500/25 hover:shadow-yellow-400/30 transition-all duration-300"
-                  >
-                    Launch Message
-                    <Send className="ml-2 h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
-                  </Button>
+
+                    {/* Message Field - Proportionally Sized */}
+                    <div className="space-y-2">
+                      <Label htmlFor="message" className="text-gray-300 font-medium">
+                        Message
+                      </Label>
+                      <Textarea
+                        id="message"
+                        name="message"
+                        value={formData.message}
+                        onChange={handleInputChange}
+                        required
+                        rows={6}
+                        className="bg-gray-800/50 border-gray-700 text-white placeholder-gray-400 focus:border-yellow-400 focus:ring-yellow-400/20 resize-none"
+                        placeholder="Tell us about your cosmic vision..."
+                      />
+                    </div>
+
+                    {/* Submit Button - Centered and Prominent */}
+                    <div className="pt-2">
+                      <Button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-black font-semibold py-4 group disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-yellow-500/25 hover:shadow-yellow-400/30 transition-all duration-300"
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                            Launching Message...
+                          </>
+                        ) : (
+                          <>
+                            Launch Message
+                            <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+                          </>
+                        )}
+                      </Button>
+                    </div>
                 </form>
               </CardContent>
             </Card>
+
+            {/* Response Time Card - Balanced with form height */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="mt-6 p-6 bg-gradient-to-r from-yellow-500/10 to-yellow-600/10 border border-yellow-500/20 rounded-lg backdrop-blur-sm"
+            >
+              <div className="flex items-center mb-3">
+                <Clock className="w-5 h-5 text-yellow-400 mr-3" />
+                <h4 className="text-white font-semibold">Response Time</h4>
+              </div>
+              <p className="text-gray-300 text-sm leading-relaxed">
+                We typically respond to all inquiries within 24 hours. For
+                urgent matters, please call us directly. Our cosmic crew is
+                always ready to help you launch your next digital adventure.
+              </p>
+            </motion.div>
           </motion.div>
         </div>
       </div>

@@ -1,65 +1,13 @@
 "use client"
 
-import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
-import { Star, Quote } from "lucide-react"
-import { useState, useEffect } from "react"
+import { testimonials } from "@/constants"
+import { motion } from "framer-motion"
+import { Quote, Star } from "lucide-react"
+import { useEffect, useState } from "react"
 
 export default function Testimonials() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
-
-  const testimonials = [
-    {
-      id: 1,
-      name: "Varun Kaushik",
-      position: "CEO",
-      company: "Opexn",
-      image: "/varun.jpeg?height=80&width=80",
-      rating: 4,
-      text: "Galobyte transformed our digital presence beyond our wildest expectations. Their cosmic approach to technology solutions propelled our business into a new dimension of success. The team's expertise in AI and cloud solutions is truly stellar.",
-      project: "Opexn",
-    },
-    {
-      id: 2,
-      name: "Ratan Mehta",
-      position: "Co-Founder",
-      company: "Think About",
-      image: "/ratan.jpeg?height=80&width=80",
-      rating: 4,
-      text: "The CosmicLMS platform revolutionized our educational delivery. Students are more engaged, teachers love the interface, and our administrative efficiency has increased by 300%. Galobyte's attention to detail is phenomenal.",
-      project: "Think About LMS",
-    },
-    {
-      id: 3,
-      name: "Anita Reddy",
-      position: "Director of Digital Initiatives",
-      company: "Medira Clinics",
-      image: "/anita.jpeg?height=80&width=80",
-      rating: 5,
-      text: "We approached Galobyte to modernize our patient engagement portal. They delivered a responsive, HIPAA-compliant platform that reduced appointment no-shows by over 40%. The communication and delivery timelines were spot on.",
-      project: "Medira Patient Portal",
-    },
-    {
-      id: 4,
-      name: "Amit Grover",
-      position: "Product Head",
-      company: "FinNexa",
-      image: "/amit.jpeg?height=80&width=80",
-      rating: 5,
-      text: "The dashboard and analytics platform Galobyte built for us gave our product a much-needed edge. Real-time reporting and streamlined user flows helped us onboard 3x more users within the first month post-launch.",
-      project: "FinNexa Insights Dashboard",
-    },
-    {
-      id: 5,
-      name: "Priya Narang",
-      position: "COO",
-      company: "Zocta Technologies",
-      image: "/priya.jpeg?height=80&width=80",
-      rating: 5,
-      text: "We were scaling fast and needed a reliable team to revamp our internal tools. Galobyte not only built what we needed, but also suggested better architecture decisions. Their delivery was clean and ahead of schedule.",
-      project: "Zocta Ops Suite",
-    },
-  ]
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -110,7 +58,7 @@ export default function Testimonials() {
             transition={{ duration: 0.6 }}
             className="lg:col-span-8"
           >
-            <Card className="bg-gradient-to-br from-gray-900/50 to-black/50 border-gray-800/50 backdrop-blur-sm p-8 relative overflow-hidden">
+            <Card className="bg-transparent border-gray-800/50 backdrop-blur-sm p-8 relative overflow-hidden">
               <div className="absolute top-6 left-6 text-yellow-400/20">
                 <Quote className="w-16 h-16" />
               </div>
@@ -161,8 +109,8 @@ export default function Testimonials() {
               >
                 <Card
                   className={`p-4 transition-all duration-300 ${index === currentTestimonial
-                    ? "bg-gradient-to-br from-yellow-500/10 to-yellow-600/5 border-yellow-400/30"
-                    : "bg-gradient-to-br from-gray-900/30 to-black/30 border-gray-800/30 hover:border-gray-700/50"
+                    ? "bg-transparent border-yellow-400/30"
+                    : "bg-transparent border-gray-800/30 hover:border-gray-700/50"
                     }`}
                 >
                   <div className="flex items-center gap-3">

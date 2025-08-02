@@ -3,21 +3,10 @@
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Users, Award, Rocket, Star, Globe } from "lucide-react"
+import { achievements, stats } from "@/constants"
 
 export default function About() {
-  const stats = [
-    { icon: Rocket, number: "500+", label: "Projects Launched", description: "Successful digital transformations" },
-    { icon: Users, number: "200+", label: "Stellar Clients", description: "Across 25+ industries" },
-    { icon: Award, number: "8+", label: "Years in Orbit", description: "Navigating digital frontiers" },
-    { icon: Globe, number: "50+", label: "Countries Reached", description: "Global digital presence" },
-  ]
 
-  const achievements = [
-    "Industry-leading 99.9% project success rate",
-    "Award-winning design and development team",
-    "Certified partnerships with major cloud providers",
-    "24/7 premium support across all time zones",
-  ]
 
   return (
     <section id="about" className="py-20 relative">

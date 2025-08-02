@@ -1,20 +1,27 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import "./globals.css"
+import type React from "react";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import { Toaster } from "sonner";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
-})
+});
 
 export const metadata: Metadata = {
   title: "Galobyte - Navigating the Digital Cosmos",
   description:
     "Premium technology agency specializing in app development, cloud solutions, AI-driven innovations, and digital transformation services.",
-    icons: "/logo_galobyte.png",
-  keywords: ["technology agency", "app development", "cloud solutions", "AI solutions", "digital transformation"],
+  icons: "/logo_galobyte.png",
+  keywords: [
+    "technology agency",
+    "app development",
+    "cloud solutions",
+    "AI solutions",
+    "digital transformation",
+  ],
   authors: [{ name: "Galobyte" }],
   creator: "Galobyte",
   publisher: "Galobyte",
@@ -29,7 +36,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Galobyte - Navigating the Digital Cosmos",
-    description: "Premium technology agency specializing in cutting-edge digital solutions.",
+    description:
+      "Premium technology agency specializing in cutting-edge digital solutions.",
     url: "https://galobyte.com",
     siteName: "Galobyte",
     images: [
@@ -46,7 +54,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Galobyte - Navigating the Digital Cosmos",
-    description: "Premium technology agency specializing in cutting-edge digital solutions.",
+    description:
+      "Premium technology agency specializing in cutting-edge digital solutions.",
     images: ["/og-image.jpg"],
   },
   robots: {
@@ -63,17 +72,20 @@ export const metadata: Metadata = {
   verification: {
     google: "your-google-verification-code",
   },
-    generator: 'v0.dev'
-}
+  generator: "v0.dev",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className={`${inter.className} antialiased select-none`}>{children}</body>
+      <body className={`${inter.className}  antialiased select-none`}>
+        {children}
+        <Toaster richColors position="top-right" />
+      </body>
     </html>
-  )
+  );
 }

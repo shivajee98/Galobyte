@@ -1,178 +1,27 @@
-'use client';
+"use client";
 
-import { FC } from 'react';
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 import {
-  Smartphone,
-  Cloud,
-  GraduationCap,
-  Settings,
-  Code,
-  Brain,
-  Search,
-  Wrench,
-  Star,
-  Rocket as RocketIcon,
   CheckCircle,
+  Rocket as RocketIcon,
   Shield,
+  Star,
   Zap,
-  LucideIcon,
-} from 'lucide-react';
+} from "lucide-react";
+import { FC } from "react";
 
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-
-/* ----------  Types ---------- */
-
-interface Service {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-  details: string;
-  benefits: string[];
-  technologies?: string[];
-  metrics?: { value: string; label: string }[];
-  features?: string[];
-}
-
-/* ----------  Component ---------- */
+} from "@/components/ui/card";
+import { services } from "@/constants";
+import { Service } from "@/lib/types";
 
 const Services: FC = () => {
-  /* -- DATA --------------------------------------------------------- */
-  const services: Service[] = [
-    {
-      icon: Smartphone,
-      title: 'App Development',
-      description:
-        'Stellar mobile applications that transcend digital boundaries.',
-      details:
-        'iOS, Android, React Native, Flutter, Progressive Web Apps (PWA).',
-      benefits: [
-        'Native & cross-platform solutions for maximum reach.',
-        'Premium UI/UX design to captivate and engage users.',
-        'Scalable architecture designed for future growth.',
-        'App Store optimization and seamless deployment.',
-      ],
-      /* optional demo data – prevents “undefined” reads */
-      technologies: ['React Native', 'Flutter'],
-      metrics: [
-        { value: '99%', label: 'Crash-free' },
-        { value: '2.5×', label: 'Faster Dev' },
-      ],
-      features: [
-        'Offline-first architecture',
-        'Push-notification engine',
-        'A/B testing built-in',
-      ],
-    },
-    /* --- trim below data for brevity – keep the same structure --- */
-    {
-      icon: RocketIcon,
-      title: 'Web Development',
-      description: 'Blazing-fast, responsive websites that drive results.',
-      details: 'React, Next.js, E-commerce, CMS, Web Applications.',
-      benefits: [
-        'Modern, SEO-friendly websites built for performance.',
-        'Engaging user experiences that convert visitors.',
-        'Robust e-commerce and CMS solutions.',
-        'Secure, scalable, and easy-to-maintain codebases.',
-      ],
-    },
-    {
-      icon: Cloud,
-      title: 'Cloud Solutions',
-      description: 'Infinite scalability in the digital cosmos.',
-      details: 'AWS, Azure, Google Cloud, Serverless Architecture.',
-      benefits: [
-        '99.9% uptime with enterprise-grade reliability.',
-        'Auto-scaling infrastructure that grows with demand.',
-        'Cost optimization through intelligent resource management.',
-        'Advanced security and compliance protocols.',
-      ],
-    },
-    {
-      icon: GraduationCap,
-      title: 'Learning Management Systems',
-      description: 'Educational platforms that expand minds across galaxies.',
-      details: 'Custom LMS, E-learning Solutions, Training Portals.',
-      benefits: [
-        'Interactive learning experiences with gamification.',
-        'Advanced analytics and progress tracking.',
-        'Multi-device accessibility for seamless learning.',
-        'Integration with existing educational tools.',
-      ],
-    },
-    {
-      icon: Settings,
-      title: 'DevOps Excellence',
-      description: 'Automated workflows orbiting in perfect harmony.',
-      details: 'CI/CD, Docker, Kubernetes, IaC.',
-      benefits: [
-        'Reduced deployment time by up to 90%.',
-        'Automated testing and quality assurance.',
-        'Zero-downtime deployments and rollbacks.',
-        'Enhanced collaboration between development teams.',
-      ],
-    },
-    {
-      icon: Code,
-      title: 'Full-Stack Development',
-      description:
-        'Complete solutions from frontend nebulae to backend black holes.',
-      details: 'React, Node.js, Python, Database Design, API Dev.',
-      benefits: [
-        'End-to-end development with unified architecture.',
-        'Modern frameworks ensuring peak performance.',
-        'RESTful and GraphQL API development.',
-        'Database optimization and security implementation.',
-      ],
-    },
-    {
-      icon: Brain,
-      title: 'AI-Driven Solutions',
-      description: 'Intelligent systems powered by cosmic algorithms.',
-      details:
-        'Machine Learning, Natural Language Processing, Computer Vision.',
-      benefits: [
-        'Predictive analytics for data-driven decisions.',
-        'Automated processes reducing operational costs.',
-        'Custom AI models tailored to your business needs.',
-        'Integration with existing systems and workflows.',
-      ],
-    },
-    {
-      icon: Search,
-      title: 'SEO Optimization',
-      description: 'Visibility that outshines distant stars.',
-      details: 'Technical SEO, Content Strategy, Performance Optimization.',
-      benefits: [
-        'Increased organic traffic by up to 300%.',
-        'Higher search engine rankings and visibility.',
-        'Improved website performance and user experience.',
-        'Comprehensive analytics and reporting.',
-      ],
-    },
-    {
-      icon: Wrench,
-      title: 'Application Maintenance',
-      description: 'Continuous support keeping systems in perfect orbit.',
-      details: 'Bug Fixes, Updates, Performance Monitoring, 24/7 Support.',
-      benefits: [
-        'Proactive monitoring preventing critical issues.',
-        'Regular updates ensuring security and performance.',
-        'Dedicated support team available around the clock.',
-        'Performance optimization and scaling recommendations.',
-      ],
-    },
-  ];
-
-  /* -- RENDER ------------------------------------------------------- */
   return (
     <section id="services" className="py-20 relative">
       <div className="container mx-auto px-4">
@@ -211,18 +60,24 @@ const Services: FC = () => {
         {/* ---------------- Grid ---------------- */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
           {/* ---------- Featured card (index 0) ---------- */}
-          <FeaturedCard service={services[0]} />
-
-          {/* ---------- Medium cards (index 1–2) ---------- */}
-          {services.slice(1, 3).map((srv, i) => (
-            <MediumCard key={srv.title} service={srv} delay={i + 1} />
+          <div className="md:col-span-6 lg:col-span-6 flex gap-4">
+            <div className="flex-1">
+              <FeaturedCard service={services[0]} />
+            </div>
+            <div className="flex-1">
+              <FeaturedCard service={services[1]} />
+            </div>
+          </div>
+          {/* ---------- Medium cards (index 2-3) ---------- */}
+          {services.slice(2, 4).map((srv, i) => (
+            <MediumCard key={srv.title} service={srv} delay={i + 2} />
           ))}
 
-          {/* ---------- Wide card (index 3) ---------- */}
-          <WideCard service={services[3]} />
+          {/* ---------- Wide card (index 4) ---------- */}
+          <WideCard service={services[4]} />
 
-          {/* ---------- Remaining small cards ---------- */}
-          {services.slice(4).map((srv, i) => (
+          {/* ---------- Remaining small cards (index 5+) ---------- */}
+          {services.slice(5).map((srv, i) => (
             <SmallCard key={srv.title} service={srv} delay={i + 5} />
           ))}
         </div>
@@ -380,169 +235,169 @@ const FeaturedCard: FC<CardProps> = ({ service }) => (
 
 /* ---------- 2. MediumCard ---------- */
 const MediumCard: FC<CardProps> = ({ service, delay = 0 }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 50 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6, delay: delay * 0.1 }}
-    viewport={{ once: true }}
-    whileHover={{ y: -5, scale: 1.01 }}
-    className="md:col-span-3 lg:col-span-3 group"
-  >
-    <Card className="bg-transparent border-gray-800/50 hover:border-yellow-400/50 transition-all duration-500 h-full backdrop-blur-sm hover:shadow-xl hover:shadow-yellow-400/10 p-3">
-      <CardHeader className="text-center pb-2">
-        <motion.div
-          whileHover={{ scale: 1.1, rotate: 5 }}
-          transition={{ duration: 0.3 }}
-          className="mx-auto mb-3 p-3 rounded-full bg-gradient-to-br from-yellow-500/20 to-yellow-600/10 w-fit border border-yellow-500/20"
-        >
-          <service.icon className="h-6 w-6 text-yellow-400" />
-        </motion.div>
+    <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: delay * 0.1 }}
+        viewport={{ once: true }}
+        whileHover={{ y: -5, scale: 1.01 }}
+        className="md:col-span-3 lg:col-span-3 group"
+    >
+        <Card className="bg-transparent border-gray-800/50 hover:border-yellow-400/50 transition-all duration-500 h-full backdrop-blur-sm hover:shadow-xl hover:shadow-yellow-400/10 p-3">
+            <CardHeader className="text-center pb-2">
+                <motion.div
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ duration: 0.3 }}
+                    className="mx-auto mb-3 p-3 rounded-full bg-gradient-to-br from-yellow-500/20 to-yellow-600/10 w-fit border border-yellow-500/20"
+                >
+                    <service.icon className="h-8 w-8 text-yellow-400" />
+                </motion.div>
 
-        <CardTitle className="text-white group-hover:text-yellow-400 transition-colors duration-300 text-lg mb-2">
-          {service.title}
-        </CardTitle>
+                <CardTitle className="text-white group-hover:text-yellow-400 transition-colors duration-300 text-xl mb-2">
+                    {service.title}
+                </CardTitle>
 
-        <CardDescription className="text-gray-400 text-sm leading-relaxed mb-2">
-          {service.description}
-        </CardDescription>
+                <CardDescription className="text-gray-400 text-base leading-relaxed mb-2">
+                    {service.description}
+                </CardDescription>
 
-        <p className="text-xs text-yellow-400/80 font-medium">
-          {service.details}
-        </p>
-      </CardHeader>
+                <p className="text-sm text-yellow-400/80 font-medium">
+                    {service.details}
+                </p>
+            </CardHeader>
 
-      <CardContent className="pt-0">
-        <div className="space-y-1">
-          <h4 className="text-xs font-semibold text-gray-300 mb-2">
-            Key Benefits:
-          </h4>
-          {service.benefits.slice(0, 2).map((b) => (
-            <motion.div
-              key={b}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3 }}
-              viewport={{ once: true }}
-              className="flex items-start space-x-2"
-            >
-              <div className="w-1 h-1 bg-yellow-400 rounded-full mt-1.5 flex-shrink-0" />
-              <p className="text-xs text-gray-400 leading-relaxed">{b}</p>
-            </motion.div>
-          ))}
-        </div>
-      </CardContent>
-    </Card>
-  </motion.div>
+            <CardContent className="pt-0">
+                <div className="space-y-1">
+                    <h4 className="text-sm font-semibold text-gray-300 mb-2">
+                        Key Benefits:
+                    </h4>
+                    {service.benefits.slice(0, 2).map((b) => (
+                        <motion.div
+                            key={b}
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.3 }}
+                            viewport={{ once: true }}
+                            className="flex items-start space-x-2"
+                        >
+                            <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full mt-2 flex-shrink-0" />
+                            <p className="text-sm text-gray-400 leading-relaxed">{b}</p>
+                        </motion.div>
+                    ))}
+                </div>
+            </CardContent>
+        </Card>
+    </motion.div>
 );
 
 /* ---------- 3. WideCard ---------- */
 const WideCard: FC<CardProps> = ({ service }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 50 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6, delay: 0.4 }}
-    viewport={{ once: true }}
-    whileHover={{ y: -5, scale: 1.01 }}
-    className="md:col-span-6 lg:col-span-6 group"
-  >
-    <Card className="bg-transparent border-gray-800/50 hover:border-yellow-400/50 transition-all duration-500 h-full backdrop-blur-sm hover:shadow-xl hover:shadow-yellow-400/10 p-4">
-      <CardHeader className="pb-3">
-        <div className="flex items-start space-x-4">
-          <motion.div
-            whileHover={{ scale: 1.1, rotate: 5 }}
-            transition={{ duration: 0.3 }}
-            className="p-3 rounded-full bg-gradient-to-br from-yellow-500/20 to-yellow-600/10 border border-yellow-500/20 flex-shrink-0"
-          >
-            <service.icon className="h-6 w-6 text-yellow-400" />
-          </motion.div>
+    <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+        viewport={{ once: true }}
+        whileHover={{ y: -5, scale: 1.01 }}
+        className="md:col-span-6 lg:col-span-6 group"
+    >
+        <Card className="bg-transparent border-gray-800/50 hover:border-yellow-400/50 transition-all duration-500 h-full backdrop-blur-sm hover:shadow-xl hover:shadow-yellow-400/10 p-4">
+            <CardHeader className="pb-3">
+                <div className="flex items-start space-x-4">
+                    <motion.div
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        transition={{ duration: 0.3 }}
+                        className="p-3 rounded-full bg-gradient-to-br from-yellow-500/20 to-yellow-600/10 border border-yellow-500/20 flex-shrink-0"
+                    >
+                        <service.icon className="h-8 w-8 text-yellow-400" />
+                    </motion.div>
 
-          <div className="flex-1">
-            <CardTitle className="text-white group-hover:text-yellow-400 transition-colors duration-300 text-lg mb-1">
-              {service.title}
-            </CardTitle>
-            <CardDescription className="text-gray-400 text-sm leading-relaxed mb-2">
-              {service.description}
-            </CardDescription>
-            <p className="text-xs text-yellow-400/80 font-medium">
-              {service.details}
-            </p>
-          </div>
-        </div>
-      </CardHeader>
+                    <div className="flex-1">
+                        <CardTitle className="text-white group-hover:text-yellow-400 transition-colors duration-300 text-xl mb-1">
+                            {service.title}
+                        </CardTitle>
+                        <CardDescription className="text-gray-400 text-base leading-relaxed mb-2">
+                            {service.description}
+                        </CardDescription>
+                        <p className="text-sm text-yellow-400/80 font-medium">
+                            {service.details}
+                        </p>
+                    </div>
+                </div>
+            </CardHeader>
 
-      <CardContent className="pt-0">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-          {service.benefits.map((b) => (
-            <motion.div
-              key={b}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3 }}
-              viewport={{ once: true }}
-              className="flex items-start space-x-2"
-            >
-              <div className="w-1 h-1 bg-yellow-400 rounded-full mt-1.5 flex-shrink-0" />
-              <p className="text-xs text-gray-400 leading-relaxed">{b}</p>
-            </motion.div>
-          ))}
-        </div>
-      </CardContent>
-    </Card>
-  </motion.div>
+            <CardContent className="pt-0">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    {service.benefits.map((b) => (
+                        <motion.div
+                            key={b}
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.3 }}
+                            viewport={{ once: true }}
+                            className="flex items-start space-x-2"
+                        >
+                            <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full mt-2 flex-shrink-0" />
+                            <p className="text-sm text-gray-400 leading-relaxed">{b}</p>
+                        </motion.div>
+                    ))}
+                </div>
+            </CardContent>
+        </Card>
+    </motion.div>
 );
 
 /* ---------- 4. SmallCard ---------- */
 const SmallCard: FC<CardProps> = ({ service, delay = 0 }) => (
-  <motion.div
-    key={service.title}
-    initial={{ opacity: 0, y: 50 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6, delay: delay * 0.1 }}
-    viewport={{ once: true }}
-    whileHover={{ y: -5, scale: 1.01 }}
-    className="md:col-span-3 lg:col-span-3 group"
-  >
-    <Card className="bg-transparent border-gray-800/50 hover:border-yellow-400/50 transition-all duration-500 h-full backdrop-blur-sm hover:shadow-xl hover:shadow-yellow-400/10 p-3">
-      <CardHeader className="text-center pb-2">
-        <motion.div
-          whileHover={{ scale: 1.1, rotate: 5 }}
-          transition={{ duration: 0.3 }}
-          className="mx-auto mb-3 p-3 rounded-full bg-gradient-to-br from-yellow-500/20 to-yellow-600/10 w-fit border border-yellow-500/20"
-        >
-          <service.icon className="h-6 w-6 text-yellow-400" />
-        </motion.div>
+    <motion.div
+        key={service.title}
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: delay * 0.1 }}
+        viewport={{ once: true }}
+        whileHover={{ y: -5, scale: 1.01 }}
+        className="md:col-span-3 lg:col-span-3 group"
+    >
+        <Card className="bg-transparent border-gray-800/50 hover:border-yellow-400/50 transition-all duration-500 h-full backdrop-blur-sm hover:shadow-xl hover:shadow-yellow-400/10 p-3">
+            <CardHeader className="text-center pb-2">
+                <motion.div
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ duration: 0.3 }}
+                    className="mx-auto mb-3 p-3 rounded-full bg-gradient-to-br from-yellow-500/20 to-yellow-600/10 w-fit border border-yellow-500/20"
+                >
+                    <service.icon className="h-8 w-8 text-yellow-400" />
+                </motion.div>
 
-        <CardTitle className="text-white group-hover:text-yellow-400 transition-colors duration-300 text-lg mb-2">
-          {service.title}
-        </CardTitle>
-        <CardDescription className="text-gray-400 text-sm leading-relaxed mb-2">
-          {service.description}
-        </CardDescription>
-        <p className="text-xs text-yellow-400/80 font-medium">
-          {service.details}
-        </p>
-      </CardHeader>
+                <CardTitle className="text-white group-hover:text-yellow-400 transition-colors duration-300 text-xl mb-2">
+                    {service.title}
+                </CardTitle>
+                <CardDescription className="text-gray-400 text-base leading-relaxed mb-2">
+                    {service.description}
+                </CardDescription>
+                <p className="text-sm text-yellow-400/80 font-medium">
+                    {service.details}
+                </p>
+            </CardHeader>
 
-      <CardContent className="pt-0">
-        <div className="space-y-1">
-          <h4 className="text-xs font-semibold text-gray-300 mb-2">
-            Key Benefits:
-          </h4>
-          {service.benefits.slice(0, 2).map((b) => (
-            <motion.div
-              key={b}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3 }}
-              viewport={{ once: true }}
-              className="flex items-start space-x-2"
-            >
-              <div className="w-1 h-1 bg-yellow-400 rounded-full mt-1.5 flex-shrink-0" />
-              <p className="text-xs text-gray-400 leading-relaxed">{b}</p>
-            </motion.div>
-          ))}
-        </div>
-      </CardContent>
-    </Card>
-  </motion.div>
+            <CardContent className="pt-0">
+                <div className="space-y-1">
+                    <h4 className="text-sm font-semibold text-gray-300 mb-2">
+                        Key Benefits:
+                    </h4>
+                    {service.benefits.slice(0, 2).map((b) => (
+                        <motion.div
+                            key={b}
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.3 }}
+                            viewport={{ once: true }}
+                            className="flex items-start space-x-2"
+                        >
+                            <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full mt-2 flex-shrink-0" />
+                            <p className="text-sm text-gray-400 leading-relaxed">{b}</p>
+                        </motion.div>
+                    ))}
+                </div>
+            </CardContent>
+        </Card>
+    </motion.div>
 );
