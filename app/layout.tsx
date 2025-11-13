@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://galobyte.com"),
+  metadataBase: new URL("https://galobyte.site"),
   alternates: {
     canonical: "/",
   },
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     title: "Galobyte - Navigating the Digital Cosmos",
     description:
       "Premium technology agency specializing in cutting-edge digital solutions.",
-    url: "https://galobyte.com",
+    url: "https://galobyte.site",
     siteName: "Galobyte",
     images: [
       {

@@ -30,7 +30,7 @@ const CONFIG: APIConfig = {
   EMAIL: {
     // Use onboarding@resend.dev for testing or your verified domain
     FROM: process.env.CONTACT_FROM_EMAIL || "onboarding@resend.dev",
-    TO: process.env.CONTACT_TO_EMAIL?.split(',') || ["info.galobyte@gmail.com"],
+    TO: process.env.CONTACT_TO_EMAIL?.split(',') || ["shivajee141004@gmail.com"],
     REPLY_TO_ENABLED: process.env.ENABLE_REPLY_TO !== 'false',
   },
   VALIDATION: {
