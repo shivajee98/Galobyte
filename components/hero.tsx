@@ -2,16 +2,16 @@
 
 import { Button } from "@/components/ui/button";
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { meetingOptions } from "@/constants";
 import { motion } from "framer-motion";
-import { ArrowRight, Clock, ExternalLink, Rocket, Sparkles } from "lucide-react";
+import { ArrowRight, ChevronRight, Play } from "lucide-react";
 
 export default function Hero() {
 
@@ -22,121 +22,71 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden select-none"
+      className="relative min-h-[90vh] flex flex-col justify-center pt-32 pb-20 overflow-hidden bg-background"
     >
-      <div className="container mx-auto px-4 text-center relative z-10">
+      <div className="container mx-auto px-6 md:px-12 relative z-10 max-w-[1400px]">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="max-w-5xl mx-auto"
+          className="flex flex-col items-center text-center"
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="mb-8"
-          >
-            <span className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-cosmic-gold-500/10 to-cosmic-gold-600/10 border border-cosmic-gold-500/30 text-cosmic-gold-400 text-sm font-medium mb-6 backdrop-blur-sm glass">
-                <Sparkles className="w-4 h-4 mr-2 animate-pulse drop-shadow-md" />
-                Navigating the Digital Cosmos
-            </span>
-          </motion.div>
+          <h1 className="text-6xl md:text-[5.5rem] lg:text-[7rem] font-semibold tracking-tighter leading-[1.05] text-foreground mb-8">
+            Precision in
+            <br />
+            <span className="text-studio-blue">Digital Engineering.</span>
+          </h1>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-6xl md:text-9xl font-bold mb-8 leading-tight text-balance"
-          >
-            <span className="bg-gradient-to-br from-gray-200 via-gray-100 to-gray-400 bg-clip-text text-transparent block mb-4 drop-shadow-2xl">
-              Welcome to
-            </span>
-            <span className="bg-gradient-to-r from-cosmic-gold-400 via-cosmic-gold-300 to-cosmic-gold-500 bg-clip-text text-transparent">
-              Galobyte
-            </span>
-          </motion.h1>
+          <p className="text-xl md:text-2xl text-studio-gray font-medium max-w-2xl mx-auto leading-relaxed mb-12">
+            We conceptualize and build premium digital interfaces.
+            Simple, powerful, and intentionally designed.
+          </p>
 
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            className="text-xl md:text-2xl text-gray-300 mb-10 max-w-4xl mx-auto leading-relaxed text-pretty"
-          >
-            Where stellar innovation meets infinite possibilities. We architect
-            premium digital solutions that transcend the boundaries of
-            technology, propelling your business into the cosmic future.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
-            className="flex flex-col sm:flex-row gap-6 justify-center items-center"
-          >
+          <div className="flex flex-col sm:flex-row gap-4 items-center">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
                   size="lg"
-                  className="bg-gradient-to-r from-cosmic-gold-500 to-cosmic-gold-600 hover:from-cosmic-gold-400 hover:to-cosmic-gold-500 text-black px-10 py-4 text-lg font-semibold group shadow-lg shadow-cosmic-gold-500/25 hover:shadow-cosmic-gold-400/30 transition-all duration-300 cosmic-glow"
+                  className="bg-studio-blue hover:bg-studio-blue/90 text-white rounded-full px-8 py-7 text-lg font-medium transition-transform active:scale-95 shadow-sm"
                 >
-                  Launch Your Vision
-                  <Rocket className="ml-3 h-5 w-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+                  Start a Project
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent
-                className="w-80 bg-black/90 backdrop-blur-md border-cosmic-gold-500/30 shadow-2xl shadow-cosmic-gold-500/10"
+                className="w-80 bg-white/80 backdrop-blur-xl border border-black/5 shadow-xl rounded-2xl p-2"
                 align="center"
-                sideOffset={8}
+                sideOffset={10}
               >
-                <DropdownMenuLabel className="text-cosmic-gold-400 font-semibold text-base px-4 py-3">
-                  Schedule Your Cosmic Journey
+                <DropdownMenuLabel className="text-studio-gray text-xs font-semibold uppercase tracking-wider px-4 py-2">
+                  Strategy Session
                 </DropdownMenuLabel>
-                <DropdownMenuSeparator className="bg-cosmic-gold-500/20" />
+                <DropdownMenuSeparator className="bg-black/5" />
                 {meetingOptions.map((option, index) => {
                   const IconComponent = option.icon;
                   return (
                     <DropdownMenuItem
                       key={index}
                       onClick={() => handleMeetingSelect(option.calendlyUrl)}
-                      className="px-4 py-4 cursor-pointer hover:bg-cosmic-gold-500/10 focus:bg-cosmic-gold-500/10 transition-colors group"
+                      className="px-4 py-3 cursor-pointer hover:bg-studio-blue hover:text-white rounded-xl transition-colors group focus:bg-studio-blue focus:text-white"
                     >
-                      <div className="flex items-start space-x-3 w-full">
-                        <div className="flex-shrink-0 mt-1">
-                          <IconComponent className="h-5 w-5 text-cosmic-gold-400 group-hover:text-cosmic-gold-300 transition-colors" />
+                      <div className="flex items-center gap-3 w-full">
+                        <IconComponent className="h-4 w-4 text-studio-blue group-hover:text-white transition-colors" />
+                        <div className="flex-1">
+                          <span className="font-medium block">{option.title}</span>
+                          <span className="text-xs text-studio-gray group-hover:text-white/80">{option.duration}</span>
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center justify-between mb-1">
-                            <h4 className="text-white font-medium text-sm group-hover:text-cosmic-gold-100 transition-colors">
-                              {option.title}
-                            </h4>
-                            <div className="flex items-center text-cosmic-gold-400/70 text-xs">
-                              <Clock className="h-3 w-3 mr-1" />
-                              {option.duration}
-                            </div>
-                          </div>
-                          <p className="text-gray-400 text-xs leading-relaxed group-hover:text-gray-300 transition-colors">
-                            {option.description}
-                          </p>
-                        </div>
-                        <ExternalLink className="h-3 w-3 text-cosmic-gold-400/50 group-hover:text-cosmic-gold-400 transition-colors flex-shrink-0 mt-1" />
+                        <ChevronRight className="w-4 h-4 text-studio-gray/50 group-hover:text-white/50" />
                       </div>
                     </DropdownMenuItem>
                   );
                 })}
-                <DropdownMenuSeparator className="bg-cosmic-gold-500/20" />
-                <div className="px-4 py-3">
-                  <p className="text-xs text-gray-500 text-center">
-                    Choose the perfect meeting type for your project needs
-                  </p>
-                </div>
               </DropdownMenuContent>
             </DropdownMenu>
-            {/* Explore Our Work Button */}
+
             <Button
               size="lg"
-              variant="outline"
-              className="border-2 border-yellow-400/30 text-yellow-400 hover:bg-yellow-400/10 hover:border-yellow-400/50 px-8 py-4 text-lg group backdrop-blur-sm transition-all duration-300 bg-transparent hover:text-yellow-600/90"
+              variant="ghost"
+              className="text-foreground hover:bg-studio-light rounded-full px-8 py-7 text-lg font-medium group"
               onClick={() => {
                 const workSection = document.getElementById("work");
                 if (workSection) {
@@ -144,52 +94,11 @@ export default function Hero() {
                 }
               }}
             >
-              Explore Our Work
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+              View Our Work
+              <ChevronRight className="ml-1 h-5 w-5 text-studio-gray group-hover:translate-x-0.5 transition-transform" />
             </Button>
-          </motion.div>
-          </motion.div>
-
-
-        {/* Floating cosmic elements */}
-        <motion.div
-          animate={{
-            y: [0, -30, 0],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
-          }}
-          className="absolute top-1/4 left-10 w-3 h-3 bg-cosmic-gold-400 rounded-full opacity-60 shadow-lg shadow-cosmic-gold-400/50 animate-pulse-glow"
-        />
-        <motion.div
-          animate={{
-            y: [0, 40, 0],
-            x: [0, 20, 0],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
-            delay: 1,
-          }}
-          className="absolute top-1/3 right-10 w-2 h-2 bg-cosmic-gold-300 rounded-full opacity-80 shadow-md shadow-cosmic-gold-300/50"
-        />
-        <motion.div
-          animate={{
-            y: [0, -25, 0],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
-            delay: 2,
-          }}
-          className="absolute bottom-1/4 left-1/4 w-2.5 h-2.5 bg-cosmic-gold-500 rounded-full opacity-70 shadow-lg shadow-cosmic-gold-500/50"
-        />
+          </div>
+        </motion.div>
       </div>
     </section>
   );

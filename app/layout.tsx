@@ -1,6 +1,6 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 
@@ -10,21 +10,26 @@ const inter = Inter({
   display: "swap",
 });
 
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-plus-jakarta",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Galobyte - Navigating the Digital Cosmos",
+  title: "Galobyte | Studio",
   description:
-    "Premium technology agency specializing in app development, cloud solutions, AI-driven innovations, and digital transformation services.",
+    "A premium digital studio engineering precision software and interface systems.",
   icons: "/logo_galobyte.png",
   keywords: [
-    "technology agency",
-    "app development",
-    "cloud solutions",
-    "AI solutions",
-    "digital transformation",
+    "product studio",
+    "software engineering",
+    "interface design",
+    "premium development",
   ],
-  authors: [{ name: "Galobyte" }],
-  creator: "Galobyte",
-  publisher: "Galobyte",
+  authors: [{ name: "Galobyte Studio" }],
+  creator: "Galobyte Studio",
+  publisher: "Galobyte Studio",
   formatDetection: {
     email: false,
     address: false,
@@ -35,17 +40,17 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Galobyte - Navigating the Digital Cosmos",
+    title: "Galobyte Studio",
     description:
-      "Premium technology agency specializing in cutting-edge digital solutions.",
+      "Engineering precision software and interface systems.",
     url: "https://galobyte.site",
-    siteName: "Galobyte",
+    siteName: "Galobyte Studio",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Galobyte - Digital Technology Agency",
+        alt: "Galobyte Studio",
       },
     ],
     locale: "en_US",
@@ -53,9 +58,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Galobyte - Navigating the Digital Cosmos",
+    title: "Galobyte Studio",
     description:
-      "Premium technology agency specializing in cutting-edge digital solutions.",
+      "Engineering precision software and interface systems.",
     images: ["/og-image.jpg"],
   },
   robots: {
@@ -81,8 +86,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className={`${inter.className}  antialiased select-none`}>
+    <html lang="en" className={`${inter.variable} ${plusJakartaSans.variable}`}>
+      <body className={`${inter.className} antialiased selection:bg-studio-blue/10 selection:text-studio-blue`}>
         {children}
         <Toaster richColors position="top-right" />
       </body>

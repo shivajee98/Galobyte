@@ -2,97 +2,58 @@
 
 import { motion } from "framer-motion";
 import Logo from "@/components/logo";
-import { Github, Twitter, Linkedin, Mail, Star } from "lucide-react";
+import { Github, Twitter, Linkedin, Mail } from "lucide-react";
+import Link from 'next/link';
 
 export default function Footer() {
   const socialLinks = [
     { icon: Github, href: "#", label: "GitHub" },
     { icon: Twitter, href: "#", label: "Twitter" },
     { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Mail, href: "info.galobyte@gmail.com", label: "Email" },
+    { icon: Mail, href: "mailto:info.galobyte@gmail.com", label: "Email" },
   ];
 
-  const footerLinks = {
-    "Cosmic Services": [
-      "App Development",
-      "Cloud Solutions",
-      "DevOps Excellence",
-      "AI Solutions",
-    ],
-    // "Mission Control": ["About Universe", "Our Crew", "Careers", "Contact"],
-    // "Knowledge Base": ["Blog", "Case Studies", "Documentation", "Support"],
-  };
+  const footerLinks = [
+    { name: "Services", href: "/#services" },
+    { name: "Work", href: "/#work" },
+    { name: "About", href: "/#about" },
+    { name: "Contact", href: "/#contact" },
+  ];
 
   return (
-    <footer className="relative py-20 border-t border-gray-800/50">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-12 mb-16">
+    <footer className="py-20 bg-background border-t border-black/5">
+      <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-12 mb-16">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="lg:col-span-2 md:col-span-2"
+            className="max-w-sm"
           >
             <Logo />
-            <p className="text-gray-400 mt-6 mb-8 max-w-md leading-relaxed">
-              Navigating digital frontiers and exploring the infinite cosmos of
-              technology to architect stellar solutions that transcend the
-              boundaries of possibility.
+            <p className="text-studio-gray mt-6 leading-relaxed">
+              Architecting the digital future with precision, clarity, and purpose.
             </p>
-            <div className="flex space-x-4">
-              {socialLinks.map((social, index) => (
-                <motion.a
-                  key={social.label}
-                  href={social.href}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  whileHover={{ scale: 1.1, y: -3 }}
-                  className="p-3 rounded-full bg-gradient-to-br from-gray-900/50 to-black/50 border border-gray-800/50 hover:border-yellow-400/50 text-gray-400 hover:text-yellow-400 transition-all duration-300 hover:shadow-lg hover:shadow-yellow-400/20"
-                  aria-label={social.label}
-                >
-                  <social.icon className="h-5 w-5" />
-                </motion.a>
-              ))}
-            </div>
           </motion.div>
 
-          {Object.entries(footerLinks).map(
-            ([category, links], categoryIndex) => (
-              <motion.div
-                key={category}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
-                viewport={{ once: true }}
-                className="lg:col-span-1 md:col-span-1"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="flex gap-8 flex-wrap"
+          >
+            {footerLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="text-foreground hover:text-studio-blue font-medium transition-colors"
               >
-                <h3 className="text-white font-semibold mb-6 text-lg">
-                  {category}
-                </h3>
-                <ul className="space-y-3">
-                  {links.map((link, linkIndex) => (
-                    <motion.li
-                      key={link}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: linkIndex * 0.05 }}
-                      viewport={{ once: true }}
-                    >
-                      <a
-                        href="#"
-                        className="text-gray-400 hover:text-yellow-400 transition-colors duration-300 hover:translate-x-1 inline-block"
-                      >
-                        {link}
-                      </a>
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.div>
-            )
-          )}
+                {link.name}
+              </Link>
+            ))}
+          </motion.div>
         </div>
 
         <motion.div
@@ -100,17 +61,23 @@ export default function Footer() {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="pt-8 border-t border-gray-800/50"
+          className="pt-8 border-t border-black/5 flex flex-col md:flex-row justify-between items-center gap-6"
         >
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-center md:text-left">
-            <p className="text-gray-400">
-              © {new Date().getFullYear()} Galobyte. All rights reserved across
-              the digital cosmos.
-            </p>
-            <div className="flex items-center justify-center space-x-2 text-gray-400">
-              <Star className="w-4 h-4 text-yellow-400" />
-              <span className="text-sm">Crafted with cosmic precision</span>
-            </div>
+          <p className="text-studio-gray text-sm">
+            © {new Date().getFullYear()} Galobyte Studios. All rights reserved.
+          </p>
+
+          <div className="flex space-x-6">
+            {socialLinks.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                className="text-studio-gray hover:text-studio-blue transition-colors"
+                aria-label={social.label}
+              >
+                <social.icon className="h-5 w-5" />
+              </a>
+            ))}
           </div>
         </motion.div>
       </div>

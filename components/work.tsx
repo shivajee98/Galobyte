@@ -1,197 +1,134 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { featuredProjects } from "@/constants";
 import { motion } from "framer-motion";
-import { ArrowRight, ExternalLink, Rocket } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
-const container = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.12 },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 32 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
-
 export default function Work() {
+  // Limiting to 5 projects as per design goal
+  const displayProjects = featuredProjects?.slice(0, 5) || [];
+
   return (
-    <section id="work" className="py-20 relative">
-      <div className="container mx-auto px-4">
+    <section id="work" className="py-32 bg-background">
+      <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
         {/* Heading */}
         <motion.div
-          initial={{ opacity: 0, y: 32 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true, amount: 0.3 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-8"
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.92 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center px-4 py-2 rounded-full bg-transparent border border-yellow-500/20 text-yellow-400 text-sm font-medium mb-6"
-          >
-            <Rocket className="w-4 h-4 mr-2" />
-            Work
-          </motion.div>
-
-          <h2 className="text-5xl md:text-6xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent">
-              Projects
+          <div className="max-w-3xl">
+            <span className="text-studio-blue font-semibold tracking-wider uppercase text-sm mb-4 block">
+              Selected Works
             </span>
-          </h2>
+            <h2 className="text-4xl md:text-5xl font-semibold text-foreground tracking-tight">
+              Designed for Impact.
+            </h2>
+          </div>
 
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            A selection of shipped products and experiments across web, mobile, and AI—built with performance and craft.
-          </p>
+          <Button
+            asChild
+            variant="ghost"
+            className="text-foreground hover:bg-studio-light group text-lg p-0 h-auto hover:bg-transparent"
+          >
+            <Link href="/work" className="flex items-center gap-2">
+              View All Projects
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </Button>
         </motion.div>
 
         {/* Projects Grid */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12"
-        >
-          {featuredProjects?.map((project) => (
-            <motion.div key={project.id} variants={item}>
-              <Card className="bg-transparent border-gray-800/50 hover:border-yellow-400/50 transition-all duration-300 backdrop-blur-sm hover:shadow-lg hover:shadow-yellow-400/10 overflow-hidden group">
-                <div className="relative w-full h-48 overflow-hidden bg-gray-900/40">
-                  <img
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title || "Project image"}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  {project.category && (
-                    <div className="absolute top-3 left-3">
-                      <span className="px-3 py-1 bg-yellow-400/20 text-yellow-400 text-xs font-medium rounded-full border border-yellow-400/30">
-                        {project.category}
-                      </span>
-                    </div>
-                  )}
-                </div>
-
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-white group-hover:text-yellow-400 transition-colors duration-200 text-xl">
-                    {project.title}
-                  </CardTitle>
-                  {project.description && (
-                    <CardDescription className="text-gray-400 text-sm leading-relaxed line-clamp-3">
-                      {project.description}
-                    </CardDescription>
-                  )}
-                </CardHeader>
-
-                <CardContent className="pt-0">
-                  {Array.isArray(project.technologies) && project.technologies.length > 0 && (
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.technologies.slice(0, 4).map((tech: string, i: number) => (
-                        <span
-                          key={`${project.id}-tech-${i}`}
-                          className="px-2 py-1 bg-gray-800/50 text-gray-300 text-xs rounded border border-gray-700/50"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                      {project.technologies.length > 4 && (
-                        <span className="px-2 py-1 bg-gray-800/50 text-gray-400 text-xs rounded border border-gray-700/50">
-                          +{project.technologies.length - 4}
-                        </span>
-                      )}
-                    </div>
-                  )}
-
-                  <div className="flex items-center gap-3">
-                    {project.liveUrl && (
-                      <Button
-                        asChild
-                        size="sm"
-                        className="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-black font-semibold"
-                      >
-                        <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.title} live`}>
-                          Live
-                          <ExternalLink className="ml-2 h-4 w-4" />
-                        </a>
-                      </Button>
-                    )}
-
-                    {project.repoUrl && (
-                      <Button
-                        asChild
-                        size="sm"
-                        variant="outline"
-                        className="border-yellow-400/50 text-yellow-400 hover:bg-yellow-400/10 bg-transparent hover:text-yellow-600/80"
-                      >
-                        <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.title} repository`}>
-                          Code
-                          <ExternalLink className="ml-2 h-4 w-4" />
-                        </a>
-                      </Button>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+        <div className="space-y-24">
+          {displayProjects.map((project, index) => (
+            <ProjectCard key={project.id} project={project} index={index} />
           ))}
-        </motion.div>
+        </div>
 
-        {/* CTA */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          className="text-center"
-        >
-          <motion.div variants={item}>
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              Want to build your
-              <span className="bg-gradient-to-r from-yellow-400 to-yellow-500 bg-clip-text text-transparent"> next project</span>?
-            </h3>
+        <div className="mt-32 border-t border-black/5 pt-12 flex justify-center">
+          <Button
+            asChild
+            className="bg-studio-dark hover:bg-studio-dark/90 text-white rounded-full px-8 py-6 text-lg font-medium"
+          >
+            <Link href="/work">
+              Explore Full Portfolio
+            </Link>
+          </Button>
+        </div>
 
-            <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-              Collaborations open for full‑stack, AI features, and performance work across web and mobile.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                asChild
-                size="lg"
-                className="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-black font-semibold"
-              >
-                <Link href="/work" aria-label="View all works">
-                  View All Works
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-yellow-400/30 text-yellow-400 hover:bg-yellow-400/10 bg-transparent hover:text-yellow-600/80"
-                onClick={() => {
-                  const el = document.getElementById("contact");
-                  el?.scrollIntoView({ behavior: "smooth", block: "start" });
-                }}
-                aria-label="Start your journey"
-              >
-                Start Your Journey
-              </Button>
-            </div>
-          </motion.div>
-        </motion.div>
       </div>
     </section>
   );
+}
+
+function ProjectCard({ project, index }: { project: any; index: number }) {
+  const isEven = index % 2 === 0;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.1 }}
+      viewport={{ once: true, margin: "-100px" }}
+    >
+      <div className={`flex flex-col gap-12 ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}>
+        {/* Image Side */}
+        <div className="flex-1 w-full lg:w-7/12 aspect-[16/10] bg-studio-light rounded-3xl overflow-hidden shadow-sm group cursor-pointer relative">
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500" />
+        </div>
+
+        {/* Content Side */}
+        <div className="flex-1 w-full lg:w-5/12 flex flex-col justify-center">
+          <span className="text-studio-blue font-semibold tracking-wider uppercase text-xs mb-4">
+            {project.category}
+          </span>
+          <h3 className="text-3xl md:text-4xl font-semibold text-foreground mb-6">
+            {project.title}
+          </h3>
+          <p className="text-lg text-studio-gray leading-relaxed mb-8 max-w-md">
+            {project.description}
+          </p>
+
+          <div className="flex flex-wrap gap-2 mb-10">
+            {project.technologies?.slice(0, 4).map((tech: string) => (
+              <span key={tech} className="text-xs text-foreground/60 border border-black/10 px-3 py-1.5 rounded-full">
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          <div className="flex gap-6">
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                className="flex items-center gap-2 text-foreground font-medium hover:text-studio-blue transition-colors group/link"
+              >
+                Live Demo
+                <ArrowUpRight className="w-4 h-4 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 transition-transform" />
+              </a>
+            )}
+            {project.githubUrl && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                className="flex items-center gap-2 text-studio-gray font-medium hover:text-foreground transition-colors"
+              >
+                Source Code
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  )
 }

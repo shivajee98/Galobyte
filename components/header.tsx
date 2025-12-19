@@ -3,9 +3,15 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Rocket } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import Logo from "./logo";
+
+interface NavItem {
+  name: string;
+  sectionId: string;
+  href?: string;
+}
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,7 +21,7 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 10);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -26,39 +32,39 @@ export default function Header() {
     setIsMenuOpen(false);
 
     if (href) {
-      // For portfolio page navigation
-      if (pathname === "/work" && href === "/work") {
-        // If already on portfolio page, scroll to top
+      if (pathname === href) {
         window.scrollTo({ top: 0, behavior: "smooth" });
         return;
       }
-      // Navigate to different page
       router.push(href);
       return;
     }
 
-    // For section navigation
-    if (pathname === "/work") {
-      // If on portfolio page, navigate to home page with section
+    if (pathname !== "/") {
       router.push(`/#${sectionId}`);
       return;
     }
 
-    // If on home page, scroll to section
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      // Offset for fixed header
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
     }
   };
 
-  const navItems = [
-    { name: "Home", sectionId: "/" },
+  const navItems: NavItem[] = [
+    { name: "Home", sectionId: "home" },
     { name: "About", sectionId: "about" },
     { name: "Services", sectionId: "services" },
     { name: "Work", sectionId: "work" },
-    { name: "Testimonials", sectionId: "testimonials" },
     { name: "Contact", sectionId: "contact" },
-    { name: "Projects", href: "/work" },
   ];
 
   return (
@@ -66,33 +72,28 @@ export default function Header() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-black/90 backdrop-blur-md border-b border-yellow-400/20 shadow-lg shadow-yellow-400/5"
-          : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
+        ? "bg-white/80 backdrop-blur-xl border-b border-black/5 shadow-sm"
+        : "bg-transparent"
+        }`}
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Logo />
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
+          <nav className="hidden lg:flex items-center space-x-10">
             {navItems.map((item, index) => (
-              <motion.button
+              <button
                 key={item.name}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
                 onClick={() =>
-                  handleNavigation(item.sectionId || "", item.href)
+                  handleNavigation(item.sectionId, item.href)
                 }
-                className="text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-medium relative group"
+                className="text-sm font-medium text-studio-gray hover:text-foreground transition-colors duration-300 tracking-wide"
               >
                 {item.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-500 transition-all duration-300 group-hover:w-full"></span>
-              </motion.button>
+              </button>
             ))}
           </nav>
 
@@ -100,7 +101,7 @@ export default function Header() {
           <Button
             variant="ghost"
             size="sm"
-            className="lg:hidden text-white hover:text-yellow-400 hover:bg-yellow-400/10"
+            className="lg:hidden text-foreground hover:bg-black/5"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? (
@@ -119,19 +120,19 @@ export default function Header() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="lg:hidden overflow-hidden bg-black/95 backdrop-blur-md border-t border-yellow-400/20"
+              className="lg:hidden overflow-hidden bg-white border-t border-black/5"
             >
-              <nav className="py-6 space-y-4">
+              <nav className="py-6 space-y-1">
                 {navItems.map((item, index) => (
                   <motion.button
                     key={item.name}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1, duration: 0.3 }}
+                    transition={{ delay: index * 0.05, duration: 0.3 }}
                     onClick={() =>
                       handleNavigation(item.sectionId || "", item.href)
                     }
-                    className="block w-full text-left px-4 py-3 text-gray-300 hover:text-yellow-400 hover:bg-yellow-400/5 transition-all duration-300 font-medium rounded-lg"
+                    className="block w-full text-left px-6 py-4 text-studio-gray hover:text-foreground hover:bg-black/5 transition-colors font-medium text-base"
                   >
                     {item.name}
                   </motion.button>
